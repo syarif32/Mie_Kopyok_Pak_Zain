@@ -101,9 +101,14 @@ export function Navbar() {
           <span className="text-xl font-bold tracking-widest text-white uppercase">Kopyok</span>
         </Link>
         
-        <Button className="h-8 rounded-full bg-[var(--color-primary)] px-5 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-[var(--color-primary)]/90">
-          Pesan
-        </Button>
+        <a 
+    href="https://wa.me/6289524570682?text=Halo%2C%20saya%20ingin%20pesan%20Mie%20Kopyok." 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="flex items-center justify-center w-full h-full px-5"
+  >
+    Pesan
+  </a>
       </header>
 
 
