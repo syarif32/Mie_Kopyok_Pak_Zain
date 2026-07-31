@@ -17,9 +17,9 @@ const contactDetails = [
   {
     icon: Phone,
     title: "Telepon & WhatsApp",
-    content: "+62 812-3456-7890\n+62 896-4675-3644",
+    content: "+62 895-2457-0682\n+62 896-4675-3644",
     actionText: "Hubungi Kami",
-    link: "https://wa.me/6281234567890",
+    link: "https://wa.me/6289524570682",
   },
   {
     icon: Mail,
