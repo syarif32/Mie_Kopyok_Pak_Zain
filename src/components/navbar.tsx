@@ -1,24 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Home, Utensils, BookOpen, Image as ImageIcon, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 
 const links = [
-  { label: "Menu", href: "/menu" },
-  { label: "Cerita", href: "/story" },
-  { label: "Galeri", href: "/gallery" },
-  { label: "Kontak", href: "/contact" },
+  { label: "Beranda", href: "/", icon: Home },
+  { label: "Menu", href: "/menu", icon: Utensils },
+  { label: "Cerita", href: "/story", icon: BookOpen }, 
+  { label: "Pemesanan", href: "/gallery", icon: ImageIcon },
+  { label: "Kontak", href: "/contact", icon: Phone },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -28,83 +27,125 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-      className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 mix-blend-difference"
-    >
-      <nav
-        className={`flex w-full max-w-7xl items-center justify-between rounded-full border px-6 py-4 transition-all duration-500 ${
-          scrolled
-            ? "border-white/10 bg-black/50 shadow-2xl backdrop-blur-xl"
-            : "border-transparent bg-transparent"
-        }`}
+    <>
+      {/* =========================================
+          1. DESKTOP NAVBAR (Tampil di PC/Laptop)
+          ========================================= */}
+      <motion.header
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+        className="fixed inset-x-0 top-4 z-50 hidden md:flex justify-center px-4"
       >
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-2xl italic text-white">Mie</span>
-          <span className="text-xl font-bold tracking-widest text-white uppercase">
-            Kopyok
-          </span>
-        </Link>
-
-        <div className="hidden items-center gap-10 md:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-light tracking-widest text-white/70 transition-colors hover:text-white uppercase"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden items-center gap-4 md:flex">
-          {/* Anda bisa menyesuaikan varian tombol ini nanti di ui/button.tsx */}
-          <Button variant="primary" className="border-white text-white hover:bg-white hover:text-black rounded-full px-6 tracking-widest text-xs uppercase">
-            Pesan Sekarang
-          </Button>
-        </div>
-
-        <button
-          className="text-white md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Buka menu"
+        <nav
+          className={`flex w-full max-w-7xl items-center justify-between rounded-full border px-8 py-4 transition-all duration-500 ${
+            scrolled
+              ? "border-white/10 bg-[var(--color-dark)]/95 backdrop-blur-xl shadow-2xl" 
+              : "border-white/20 bg-black/20 backdrop-blur-md"
+          }`}
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
+          <Link href="/" className="flex items-center gap-2">
+            <span className="font-serif text-2xl italic text-white">Mie</span>
+            <span className="text-xl font-bold tracking-widest text-white uppercase">
+              Kopyok
+            </span>
+          </Link>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-24 w-[92%] max-w-5xl rounded-3xl border border-white/10 bg-black/90 p-8 backdrop-blur-xl md:hidden"
-          >
-            <div className="flex flex-col gap-6 text-center">
-              {links.map((link) => (
+          <div className="flex items-center gap-8">
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-lg tracking-widest text-white/80 hover:text-white uppercase"
+                  className={`relative text-sm tracking-widest transition-colors uppercase py-2 ${
+                    isActive ? "text-white font-medium" : "text-white/70 font-light hover:text-white"
+                  }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-desktop-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-[var(--color-primary)]"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
                 </Link>
-              ))}
-              <div className="mt-4 flex flex-col gap-4">
-                <Button className="w-full rounded-full bg-white text-black tracking-widest uppercase">
-                  Pesan Sekarang
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Button className="border border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:bg-white hover:border-white hover:text-[var(--color-dark)] rounded-full px-8 py-5 tracking-widest text-xs font-bold uppercase transition-all shadow-lg">
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                Pesan Sekarang
+              </a>
+            </Button>
+          </div>
+        </nav>
+      </motion.header>
+
+
+      {/* =========================================
+          2. MOBILE TOP BAR (Solusi agar atas tidak kosong)
+          ========================================= */}
+      <header 
+        className={`md:hidden fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${
+          scrolled 
+            ? "bg-[var(--color-dark)]/95 backdrop-blur-xl shadow-md border-b border-white/5" 
+            : "bg-gradient-to-b from-black/60 to-transparent"
+        }`}
+      >
+        <Link href="/" className="flex items-center gap-1">
+          <span className="font-serif text-2xl italic text-white">Mie</span>
+          <span className="text-xl font-bold tracking-widest text-white uppercase">Kopyok</span>
+        </Link>
+        
+        <Button className="h-8 rounded-full bg-[var(--color-primary)] px-5 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-[var(--color-primary)]/90">
+          Pesan
+        </Button>
+      </header>
+
+
+      {/* =========================================
+          3. MOBILE BOTTOM NAV (Animasi Tab Bar)
+          ========================================= */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-4 pt-8 px-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+        <nav className="pointer-events-auto mx-auto flex w-full max-w-md items-center justify-between rounded-full border border-white/10 bg-[var(--color-dark)]/95 px-2 py-2 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] relative">
+          {links.map((link) => {
+            const isActive = pathname === link.href;
+            const Icon = link.icon;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative flex flex-col items-center justify-center w-14 h-14 z-10 transition-colors duration-300 ${
+                  isActive ? "text-[var(--color-dark)]" : "text-white/60 hover:text-white"
+                }`}
+                aria-label={link.label}
+              >
+                {/* Indikator Latar Belakang Geser (Magic Pill) */}
+                {isActive && (
+                  <motion.div
+                    layoutId="active-mobile-indicator"
+                    className="absolute inset-0 rounded-full bg-[var(--color-primary)] shadow-md"
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  />
+                )}
+                
+                {/* Ikon & Label */}
+                <span className="relative z-20 flex flex-col items-center gap-1">
+                  <Icon size={isActive ? 20 : 22} strokeWidth={isActive ? 2.5 : 1.5} className="transition-all duration-300" />
+                  <span className={`text-[9px] tracking-wider uppercase font-medium transition-all duration-300 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 absolute bottom-0"}`}>
+                    {link.label}
+                  </span>
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+    </>
   );
 }

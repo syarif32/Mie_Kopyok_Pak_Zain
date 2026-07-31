@@ -1,43 +1,56 @@
-"use client";
+import { createClient } from '@supabase/supabase-js';
+import { MenuGrid, type DatabaseMenu, type MenuCategory } from "@/components/featured-products";
+import { MagicCursor } from "@/components/ui/cursor";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
-import { motion } from "framer-motion";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-const menuItems = [
-  { name: "Mie Kopyok Spesial", price: "Rp 25.000", desc: "Sajian autentik dengan ekstra krupuk gendar dan tahu pong." },
-  { name: "Mie Kopyok Biasa", price: "Rp 20.000", desc: "Resep klasik warisan keluarga sejak 1970." },
-  { name: "Es Teh Kampul", price: "Rp 8.000", desc: "Teh legit dengan irisan jeruk peras segar." },
-  { name: "Es Jeruk", price: "Rp 10.000", desc: "Perasan jeruk murni menyegarkan." },
-];
+async function getMenuData() {
+  // Mengambil daftar kategori yang aktif
+  const { data: categories } = await supabase
+    .from('menu_categories')
+    .select('id, name, slug')
+    .eq('is_active', true)
+    .order('name');
 
-export default function MenuPage() {
+  const { data: menus } = await supabase
+    .from('menus')
+    .select(`
+      id, 
+      name, 
+      current_price, 
+      image_url, 
+      description,
+      menu_categories (
+        name,
+        slug
+      )
+    `)
+    .eq('is_active', true);
+
+  return { 
+    menus: (menus as unknown as DatabaseMenu[]) || [], 
+    categories: (categories as MenuCategory[]) || [] 
+  };
+}
+
+export default async function MenuPage() {
+  const { menus, categories } = await getMenuData();
+
   return (
-    <main className="min-h-screen bg-black pt-40 pb-20 px-6 md:px-20 text-white">
-      <div className="max-w-4xl mx-auto">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter mb-16 uppercase"
-        >
-          Menu Pilihan
-        </motion.h1>
+    <main className="relative min-h-screen bg-[var(--color-cream)] text-[var(--color-dark)] flex flex-col">
+      <MagicCursor colors={["139 107 77", "166 98 31"]} />
+      <Navbar />
+      
+      <div className="pt-20" /> 
 
-        <div className="flex flex-col gap-12">
-          {menuItems.map((item, index) => (
-            <motion.div 
-              key={item.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group border-b border-white/10 pb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-white/50 transition-colors"
-            >
-              <div>
-                <h2 className="text-2xl font-light tracking-wide">{item.name}</h2>
-                <p className="text-white/50 mt-2 font-light">{item.desc}</p>
-              </div>
-              <span className="text-xl font-medium tracking-widest">{item.price}</span>
-            </motion.div>
-          ))}
-        </div>
+      <MenuGrid menus={menus} categories={categories} />
+
+      <div className="mt-auto w-full">
+        <Footer />
       </div>
     </main>
   );

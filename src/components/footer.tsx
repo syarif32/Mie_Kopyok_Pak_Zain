@@ -34,8 +34,8 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.4fr_2fr]">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-2">
-              <span className="font-serif text-2xl italic">Nusa</span>
-              <span className="text-xl font-semibold">karya</span>
+              <span className="font-serif text-2xl italic">Mie Kopyok </span>
+              <span className="text-xl font-semibold">Pak Zain</span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-white/60">
               A home for Indonesian UMKM — connecting authentic, handmade
@@ -43,14 +43,14 @@ export function Footer() {
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <input
+              {/* <input
                 type="email"
                 placeholder="Your email address"
                 className="visible-focus w-full max-w-xs rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none sm:w-auto"
               />
               <Button variant="primary" size="sm">
                 Subscribe
-              </Button>
+              </Button> */}
             </div>
 
             <div className="mt-2 flex items-center gap-3">
@@ -89,7 +89,8 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 sm:flex-row">
-          <p>© 2026 NUSAKARYA. Made with care for Indonesian makers.</p>
+          <p>© 2026 MIE KOPYOK PAK ZAIN. Created by <a href="https://zaeeon-site.vercel.app" target="_blank" rel="noopener noreferrer" className="visible-focus hover:text-white/100">Muhammad Najwa Syarif</a></p>
+          
           <div className="flex gap-6">
             <a href="#" className="visible-focus hover:text-white/70">
               Privacy Policy

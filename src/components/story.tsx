@@ -3,26 +3,33 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Story() {
   return (
-    <section id="story" className="mx-auto max-w-7xl px-6 py-28">
+    <section id="cerita" className="mx-auto max-w-7xl px-6 py-28 relative z-20">
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        
+        {/* Kolom Kiri: Gambar Momen Memasak / Dapur */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8 }}
-          className="relative aspect-[4/5] w-full overflow-hidden rounded-[48px] shadow-nk-soft"
+          className="relative aspect-[4/5] w-full overflow-hidden rounded-[48px] shadow-2xl"
         >
+          {/* Gambar diubah menjadi suasana memasak atau bahan tradisional */}
           <Image
-            src="https://images.unsplash.com/photo-1604335398980-ef1749d038a4?q=80&w=1600&auto=format&fit=crop"
-            alt="Artisan hand-dyeing batik cloth"
+            src="/images/ko.png"
+            alt="Proses meracik bumbu warisan"
             fill
             className="object-cover"
           />
+          {/* Overlay tipis agar gambar lebih menyatu dengan tema */}
+          <div className="absolute inset-0 bg-black/10" />
         </motion.div>
 
+        {/* Kolom Kanan: Teks Filosofi */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,30 +37,31 @@ export function Story() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="flex flex-col gap-6"
         >
-          <span className="text-xs font-medium tracking-[0.2em] text-primary">
-            OUR PHILOSOPHY
+          <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
+            Filosofi Rasa
           </span>
-          <h2 className="text-4xl font-medium leading-[1.1] text-dark sm:text-5xl">
-            Every Product
+          
+          <h2 className="text-4xl font-bold leading-[1.1] text-[var(--color-dark)] sm:text-5xl uppercase tracking-tighter">
+            Setiap Piring
             <br />
-            Has <span className="emphasis text-primary">A Story</span>.
+            Menyimpan <span className="emphasis text-[var(--color-primary)] lowercase">Cerita</span>.
           </h2>
-          <p className="text-lg leading-relaxed text-gray">
-            Behind every jar, weave, and carving is someone who learned the
-            craft from someone else — a parent, a neighbor, a village elder.
-            NUSAKARYA exists to carry that lineage forward, connecting
-            Indonesian artisans directly with people who care where things
-            come from.
+          
+          <p className="text-lg leading-relaxed text-[var(--color-dark)]/70 font-light">
+            Di balik kepekatan kuah kaldu bawang dan renyahnya kerupuk gendar, terdapat dedikasi panjang merawat resep leluhur. Kami mempertahankan metode memasak lambat dan pemilihan rempah segar yang diturunkan dari generasi ke generasi.
           </p>
-          <p className="leading-relaxed text-gray">
-            We work with small producers across the archipelago to bring
-            their work to a wider audience, without asking them to compromise
-            the methods that make it worth having in the first place.
+          
+          <p className="leading-relaxed text-[var(--color-dark)]/70 font-light">
+            Bagi kami, menyajikan makanan bukan sekadar menuntaskan lapar. Ini adalah tentang merawat kenangan masa lalu dan menyajikannya kembali secara hangat ke hadapan Anda hari ini.
           </p>
-          <div>
-            <Button variant="secondary" size="lg">
-              Read More
-            </Button>
+          
+          <div className="mt-4">
+            {/* Tombol diarahkan ke halaman cerita yang sudah kita buat sebelumnya */}
+            <Link href="/cerita" passHref>
+              <Button className="rounded-full bg-[var(--color-primary)] px-8 py-6 text-xs font-bold tracking-widest uppercase text-white shadow-lg transition-all hover:bg-[var(--color-primary)]/90 hover:scale-105">
+                Baca Kisah Lengkap
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -1,96 +1,202 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { provinces, type Province } from "@/lib/data";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { SectionHeading } from "@/components/section-heading";
+import { Map, FlightMultiRoute, FlightAirport } from "@/components/ui/flightcn-flight-multi-route";
+import Image from "next/image";
+
+// Data kota dunia dengan delay untuk sinkronisasi popup
+const destinasiDunia = [
+  { id: "CDG", city: "Paris", lng: 2.3522, lat: 48.8566, makanan: "Croissant", desc: "Renyah dan buttery khas Eropa.", delay: 0, labelPosition: "top" as const },
+  { id: "DXB", city: "Dubai", lng: 55.2708, lat: 25.2048, makanan: "Shawarma", desc: "Kaya rempah khas Timur Tengah.", delay: 3500, labelPosition: "bottom" as const },
+  { id: "DEL", city: "New Delhi", lng: 77.2090, lat: 28.6139, makanan: "Tikka Masala", desc: "Kari kental pedas berempah dari India.", delay: 5000, labelPosition: "top" as const },
+  { id: "TYO", city: "Tokyo", lng: 139.6917, lat: 35.6895, makanan: "Sushi & Ramen", desc: "Kesempurnaan rasa umami dari Jepang.", delay: 9000, labelPosition: "top" as const },
+  { id: "SYD", city: "Sydney", lng: 151.2093, lat: -33.8688, makanan: "Meat Pie", desc: "Sajian hangat dari negeri kangguru.", delay: 14300, labelPosition: "bottom" as const },
+  { 
+    id: "SRG", 
+    city: "Semarang", 
+    lng: 110.4225, 
+    lat: -6.9697, 
+    makanan: "🌟 MIE KOPYOK 🌟", 
+    desc: "Pesawat tiba! Saatnya menikmati kaldu pekat dan kerupuk gendar khas Pak Zain.", 
+    delay: 18000,
+    isSpesial: true,
+    image: "/images/ko.png", 
+    labelPosition: "top" as const
+  }
+];
+
+const ruteTurDunia: [number, number][] = destinasiDunia.map(dest => [dest.lng, dest.lat]);
+const DURASI_TERBANG = 18000; // Total 18 detik perjalanan
+const JEDA_SEMARANG = 4000;   // 4 detik diam di Semarang sebelum muter ulang
 
 export function IndonesiaMap() {
-  const [active, setActive] = useState<Province | null>(null);
+  const [active, setActive] = useState<string | null>(null);
+  const [animationKey, setAnimationKey] = useState(0); // Pemicu restart animasi tanpa error TypeScript
+  
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(mapContainerRef, { once: true, margin: "-100px" });
+
+  // MESIN WAKTU & LOOPING OTOMATIS
+  useEffect(() => {
+    if (!isInView) return;
+
+    const timers: NodeJS.Timeout[] = [];
+    
+    // 1. Jalankan popup kota berdasar delay
+    destinasiDunia.forEach((dest) => {
+      const t = setTimeout(() => {
+        setActive(dest.id);
+      }, dest.delay);
+      timers.push(t);
+    });
+
+    // 2. Looping otomatis: Setelah terbang (18 detik) + diam (4 detik), reset key untuk ulang dari awal
+    const totalSiklus = DURASI_TERBANG + JEDA_SEMARANG;
+    const tLoop = setTimeout(() => {
+      setActive(null);
+      setAnimationKey((prev) => prev + 1); // Me-restart komponen peta secara bersih
+    }, totalSiklus);
+    timers.push(tLoop);
+
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+  }, [isInView, animationKey]);
 
   return (
-    <section className="bg-dark py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-[var(--color-dark)] py-28 relative z-20 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
         <SectionHeading
-          eyebrow="From Sabang to Merauke"
-          title="One Archipelago, Thousands of Makers"
-          emphasisWord="Thousands"
-          description="Hover a marker to see how many UMKM call that province home, and what they're known for."
+          eyebrow="Rasa Yang Mendunia"
+          title="Tur Kuliner Menuju Semarang"
+          emphasisWord="Semarang"
+          description="Ikuti perjalanan ini. Kenali cita rasa dari berbagai benua, hingga akhirnya Anda menyadari bahwa kehangatan semangkuk Mie Kopyok adalah yang paling dirindukan."
           light
         />
 
-        <div className="relative mt-16 w-full overflow-x-auto">
-          <svg
-            viewBox="0 0 860 460"
-            className="h-auto w-full min-w-[720px]"
-            role="img"
-            aria-label="Stylized map of Indonesia's islands"
+        <div 
+          ref={mapContainerRef} 
+          className="relative mt-16 w-full max-w-6xl mx-auto h-[500px] md:h-[650px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10"
+        >
+          <Map 
+            theme="dark"
+            center={[95.0, 15.0]} 
+            zoom={1.6}
+            interactive={true}
           >
-            {/* Stylized island silhouettes — abstract, not geographically precise */}
-            <g fill="#2A2A2A">
-              <ellipse cx="90" cy="140" rx="90" ry="34" transform="rotate(-18 90 140)" />
-              <ellipse cx="280" cy="260" rx="130" ry="30" transform="rotate(-8 280 260)" />
-              <ellipse cx="410" cy="340" rx="220" ry="26" transform="rotate(-2 410 340)" />
-              <ellipse cx="470" cy="230" rx="110" ry="60" />
-              <ellipse cx="600" cy="255" rx="70" ry="90" transform="rotate(20 600 255)" />
-              <ellipse cx="720" cy="240" rx="90" ry="40" />
-              <ellipse cx="800" cy="255" rx="90" ry="46" />
-            </g>
+            {/* Menggunakan key={animationKey} agar rute ter-reset total saat waktunya looping */}
+            <FlightMultiRoute
+              key={animationKey}
+              waypoints={ruteTurDunia}
+              color="#e11d48"
+              width={2}
+              opacity={0.8}
+              lineStyle="dash"
+              animate={isInView ? { 
+                duration: DURASI_TERBANG, 
+                loop: false, 
+              } : false}
+            />
 
-            {provinces.map((p) => (
-              <g
-                key={p.id}
-                onMouseEnter={() => setActive(p)}
-                onMouseLeave={() => setActive((cur) => (cur?.id === p.id ? null : cur))}
-                onFocus={() => setActive(p)}
-                onBlur={() => setActive((cur) => (cur?.id === p.id ? null : cur))}
-                tabIndex={0}
-                className="cursor-pointer outline-none"
-              >
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={active?.id === p.id ? 9 : 6}
-                  className="fill-primary transition-all duration-300"
-                />
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={active?.id === p.id ? 18 : 12}
-                  className="fill-primary/20 transition-all duration-300"
-                />
-              </g>
-            ))}
-          </svg>
+            {destinasiDunia.map((dest) => {
+              const isActive = active === dest.id;
 
-          <AnimatePresence>
-            {active && (
-              <motion.div
-                initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                transition={{ duration: 0.2 }}
-                style={{
-                  left: `${(active.x / 860) * 100}%`,
-                  top: `${(active.y / 460) * 100}%`,
-                }}
-                className="pointer-events-none absolute z-10 w-56 -translate-x-1/2 -translate-y-[130%] rounded-2xl border border-white/10 bg-[#242424] p-4 shadow-nk-soft"
-              >
-                <p className="text-sm font-medium text-white">{active.name}</p>
-                <p className="mt-1 text-xs text-white/60">
-                  {active.umkm} UMKM registered
-                </p>
-                <p className="mt-1 text-xs text-primary">
-                  Popular: {active.popular}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              return (
+                <FlightAirport
+                  key={dest.id}
+                  longitude={dest.lng}
+                  latitude={dest.lat}
+                  markerContent={
+                    <div 
+                      className="relative flex items-center justify-center cursor-pointer group z-50"
+                      onMouseEnter={() => setActive(dest.id)}
+                    >
+                      <div className="absolute w-16 h-16 rounded-full z-10" />
+
+                      <div 
+                        className={`relative flex items-center justify-center rounded-full transition-all duration-300 ${
+                          dest.isSpesial ? "w-8 h-8 bg-[var(--color-primary)]/40 z-20" : "w-5 h-5 bg-white/30"
+                        } ${isActive ? "scale-125" : "scale-100"}`}
+                      >
+                        <div 
+                          className={`rounded-full shadow-lg ${
+                            dest.isSpesial ? "bg-[var(--color-primary)] w-5 h-5 border-2 border-white" : "bg-white w-2.5 h-2.5 border border-black/20"
+                          }`}
+                        />
+                        {dest.isSpesial && (
+                          <div className="absolute inset-0 rounded-full bg-[var(--color-primary)] animate-ping opacity-70" />
+                        )}
+                      </div>
+
+                      {/* Label Teks Kota */}
+                      <div 
+                        className={`absolute left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none whitespace-nowrap transition-all duration-300 ${
+                          dest.labelPosition === "top" ? "bottom-6" : "top-6"
+                        } ${isActive ? "opacity-0" : "opacity-100"}`}
+                      >
+                        <span className={`text-[10px] font-bold tracking-widest uppercase bg-black/60 px-3 py-1 rounded-full shadow-sm text-white backdrop-blur-sm ${dest.isSpesial ? "text-[var(--color-primary)]" : ""}`}>
+                          {dest.city}
+                        </span>
+                      </div>
+
+                      {/* Tooltip / Popup Spesial */}
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 15, scale: 0.5 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 15, scale: 0.5 }}
+                            transition={{ duration: 0.4, type: "spring", stiffness: 300 }}
+                            className={`absolute bottom-full mb-4 left-1/2 -translate-x-1/2 w-[280px] rounded-2xl border p-4 shadow-2xl backdrop-blur-xl pointer-events-none z-50 ${
+                              dest.isSpesial 
+                                ? "bg-[var(--color-dark)]/95 border-[var(--color-primary)] text-white" 
+                                : "bg-black/95 border-white/20 text-white"
+                            }`}
+                          >
+                            <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-r border-b ${
+                              dest.isSpesial ? "bg-[var(--color-dark)] border-[var(--color-primary)]" : "bg-black/95 border-white/20"
+                            }`} />
+                            
+                            <div className="relative z-10 text-center">
+                              <p className={`text-[10px] font-bold tracking-widest uppercase mb-1 ${dest.isSpesial ? "text-[var(--color-primary)]" : "text-white/60"}`}>
+                                {dest.city}
+                              </p>
+                              <p className={`font-bold leading-tight ${dest.isSpesial ? "text-2xl text-white drop-shadow-md" : "text-lg text-white"}`}>
+                                {dest.makanan}
+                              </p>
+                              <p className={`mt-2 text-xs leading-relaxed ${dest.isSpesial ? "text-white/90 font-medium" : "text-white/70"}`}>
+                                {dest.desc}
+                              </p>
+
+                              {dest.image && (
+                                <motion.div 
+                                  initial={{ opacity: 0, marginTop: 0, height: 0 }}
+                                  animate={{ opacity: 1, marginTop: 12, height: "120px" }}
+                                  transition={{ delay: 0.2 }}
+                                  className="relative w-full rounded-xl overflow-hidden border border-white/10 shadow-inner"
+                                >
+                                  <Image 
+                                    src={dest.image} 
+                                    alt="Mie Kopyok Pak Zain" 
+                                    fill
+                                    className="object-cover hover:scale-110 transition-transform duration-700"
+                                    sizes="250px"
+                                  />
+                                </motion.div>
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  }
+                />
+              );
+            })}
+          </Map>
         </div>
-
-        <p className="mt-6 text-center text-xs text-white/40">
-          Map is a stylized representation. Hover or focus a marker to explore each province.
-        </p>
       </div>
     </section>
   );

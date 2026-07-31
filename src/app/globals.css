@@ -16,9 +16,8 @@
   --radius-nk-sm: 18px;
   --radius-nk-lg: 48px;
 
-  /* ---- Type ---- */
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-instrument-serif);
+  /* ---- Type (Disambung ke Poppins) ---- */
+  --font-sans: var(--font-poppins);
 
   /* ---- Shadows ---- */
   --shadow-nk-soft: 0 20px 60px -20px rgba(29, 29, 29, 0.18);
@@ -29,10 +28,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* PAKSA SEMUA ELEMEN MENGGUNAKAN POPPINS */
+*, body, h1, h2, h3, h4, h5, h6, p, span, button, input {
+  font-family: var(--font-sans) !important;
+}
+
 body {
   background-color: var(--color-cream);
   color: var(--color-dark);
-  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -41,14 +44,13 @@ body {
   color: var(--color-white);
 }
 
-/* Utility: editorial italic serif emphasis */
+/* Utility */
 .emphasis {
-  font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
 }
 
-/* Custom scrollbar, kept subtle */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -76,4 +78,46 @@ body {
 .visible-focus:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 4px;
+}
+
+/* --- MAGIC CURSOR STYLES --- */
+:root {
+  --mouse-sparkles-glow-rgb: 255 153 51; 
+}
+
+.mouse-sparkles-star {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%); 
+}
+
+.mouse-sparkles-glow-point {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgb(var(--mouse-sparkles-glow-rgb) / 0.4);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px 2px rgb(var(--mouse-sparkles-glow-rgb) / 0.2);
+}
+
+@keyframes fall-1 {
+  0% { transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25); opacity: 0; }
+  5% { transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1); opacity: 0.6; }
+  100% { transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1); opacity: 0; }
+}
+
+@keyframes fall-2 {
+  0% { transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25); opacity: 0; }
+  10% { transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1); opacity: 0.5; }
+  100% { transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25); opacity: 0; }
+}
+
+@keyframes fall-3 {
+  0% { transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5); opacity: 0; }
+  15% { transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1); opacity: 0.5; }
+  100% { transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5); opacity: 0; }
 }

@@ -135,31 +135,31 @@ export type Maker = {
 export const makers: Maker[] = [
   {
     id: "m1",
-    name: "Pak Ahmad",
-    role: "Coffee Farmer",
-    city: "Temanggung, Central Java",
+    name: "Pak Zain",
+    role: "Owner",
+    city: "Semarang, Central Java",
     bio: "Three generations of his family have farmed the slopes of Sindoro. Pak Ahmad still hand-picks every cherry at peak ripeness before sun-drying it on raised beds.",
     image:
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "m2",
-    name: "Bu Sari",
-    role: "Batik Artisan",
-    city: "Lasem, Central Java",
+    name: "Bu Farida",
+    role: "Co Owner",
+    city: "Ungaran, Central Java",
     bio: "Bu Sari learned the canting from her grandmother at age nine. Each cloth she makes takes up to six weeks, layered in dye drawn from mahogany bark.",
     image:
       "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1200&auto=format&fit=crop",
   },
-  {
-    id: "m3",
-    name: "Pak Wayan",
-    role: "Wood Carver",
-    city: "Ubud, Bali",
-    bio: "Pak Wayan carves teak the way his father taught him — by hand, no power tools, letting the grain of the wood decide the final form of every piece.",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
-  },
+  // {
+  //   id: "m3",
+  //   name: "Syarif",
+  //   role: "General Manager",
+  //   city: "Semarang, Central Java",
+  //   bio: "Pak Wayan carves teak the way his father taught him — by hand, no power tools, letting the grain of the wood decide the final form of every piece.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+  // },
 ];
 
 export type Province = {
