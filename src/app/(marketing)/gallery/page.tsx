@@ -170,7 +170,7 @@ export default function GalleryPage() {
               className="text-center mb-6 px-6"
             >
               <h3 className="text-5xl md:text-5xl font-bold tracking-tighter uppercase">
-                Menerima Pesanan <span className="emphasis text-[var(--color-primary)] lowercase">Catering</span>
+                Menerima Pesanan <span className="emphasis text-[var(--color-primary)] lowercase">Sesuai Request Anda</span>
               </h3>
             </motion.div>
             
@@ -199,7 +199,7 @@ export default function GalleryPage() {
         <section className='py-20 md:py-32 w-full flex items-center justify-center relative shrink-0 z-10'>
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#8B6B4D20_1px,transparent_1px),linear-gradient(to_bottom,#8B6B4D20_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'></div>
           <h2 className='2xl:text-7xl text-5xl px-8 font-bold text-center tracking-tight uppercase leading-[120%] relative z-10'>
-            Menu <span className="emphasis text-[var(--color-primary)] lowercase">Catering</span>
+            Menu <span className="emphasis text-[var(--color-primary)] lowercase">Pesanan</span>
           </h2>
         </section>
 

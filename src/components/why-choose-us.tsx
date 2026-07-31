@@ -1,27 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Truck, HeartHandshake } from "lucide-react";
+import { UtensilsCrossed, Flame, HeartHandshake } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 
 const reasons = [
   {
-    icon: ShieldCheck,
-    title: "Verified Products",
+    icon: Flame,
+    title: "Resep Legendaris",
     description:
-      "Every store on NUSAKARYA is visited and verified before it goes live, so authenticity is never in question.",
+      "Diracik secara turun-temurun dengan kuah kaldu bawang yang pekat, hangat, dan menggugah selera di setiap suapan.",
   },
   {
-    icon: Truck,
-    title: "Fast Delivery",
+    icon: UtensilsCrossed,
+    title: "Bahan Segar Pilihan",
     description:
-      "Partnered logistics across the archipelago mean your order reaches you quickly, wherever you are.",
+      "Menggunakan tauge segar berkualitas, irisan lontong empuk, serta kerupuk gendar renyah khas buatan tangan.",
   },
   {
     icon: HeartHandshake,
-    title: "Support Local Economy",
+    title: "Cita Rasa Autentik",
     description:
-      "Every purchase goes directly toward the livelihoods of the farmers, weavers, and makers who created it.",
+      "Menghadirkan kehangatan cita rasa asli Semarang langsung ke meja Anda dengan penuh dedikasi dan keramahan.",
   },
 ];
 
@@ -29,9 +29,9 @@ export function WhyChooseUs() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-28">
       <SectionHeading
-        eyebrow="Why NUSAKARYA"
-        title="Built on Trust, Not Just Transactions"
-        emphasisWord="Trust"
+        eyebrow="Keunggulan Kami"
+        title="Kenapa Harus Kami?"
+        emphasisWord="Kami"
         align="center"
         className="mx-auto"
       />
@@ -46,13 +46,13 @@ export function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="flex flex-col items-start gap-5 rounded-[32px] bg-white p-9 shadow-nk-card"
+              className="flex flex-col items-start gap-5 rounded-[var(--radius-nk-sm)] bg-white p-9 shadow-nk-card border border-[var(--color-primary)]/10"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
                 <Icon size={24} />
               </div>
-              <h3 className="text-xl font-medium text-dark">{reason.title}</h3>
-              <p className="text-sm leading-relaxed text-gray">
+              <h3 className="text-xl font-medium text-[var(--color-dark)]">{reason.title}</h3>
+              <p className="text-sm leading-relaxed text-[var(--color-gray)]">
                 {reason.description}
               </p>
             </motion.div>
