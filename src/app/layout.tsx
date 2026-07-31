@@ -12,9 +12,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "NUSAKARYA — Discover Indonesia Through Local Craftsmanship",
+  title: "Mie Kopyok Pak Zain — Discover Indonesia Through Local Craftsmanship",
   description:
-    "NUSAKARYA connects you with authentic handmade products and the stories of the Indonesian artisans, farmers, and makers behind them.",
+    "Mie Kopyok Pak Zain connects you with authentic handmade products and the stories of the Indonesian artisans, farmers, and makers behind them.",
   keywords: [
     "UMKM",
     "Indonesia",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "Nusantara",
   ],
   openGraph: {
-    title: "NUSAKARYA — Discover Indonesia Through Local Craftsmanship",
+    title: "Mie Kopyok Pak Zain — Discover Indonesia Through Local Craftsmanship",
     description:
       "Authentic products, real stories, from every corner of Indonesia.",
     type: "website",
