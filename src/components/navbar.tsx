@@ -92,8 +92,8 @@ export function Navbar() {
       <header 
         className={`xl:hidden fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 sm:px-6 py-4 transition-all duration-300 ${
           scrolled 
-            ? "bg-[var(--color-dark)]/95 backdrop-blur-xl shadow-md border-b border-white/5" 
-            : "bg-gradient-to-b from-black/60 to-transparent"
+            ? "bg-[var(--color-dark)]/95 backdrop-blur-xl border-b border-white/10"
+            : "bg-[var(--color-dark)]/85 backdrop-blur-md border-b border-white/10"
         }`}
       >
         <Link href="/" className="flex items-center gap-1">
@@ -115,8 +115,8 @@ export function Navbar() {
       {/* =========================================
           3. MOBILE BOTTOM NAV (Animasi Tab Bar)
           ========================================= */}
-      <div className="xl:hidden fixed bottom-0 inset-x-0 z-50 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-8 px-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
-        <nav className="pointer-events-auto mx-auto flex w-full max-w-md items-center justify-between rounded-full border border-white/10 bg-[var(--color-dark)]/95 px-2 py-2 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] relative">
+      <div className="xl:hidden fixed bottom-0 inset-x-0 z-50 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 px-3 sm:px-4 pointer-events-none">
+        <nav className="pointer-events-auto mx-auto grid grid-cols-5 gap-1 w-full max-w-md items-center rounded-3xl border border-white/10 bg-[var(--color-dark)]/95 p-1.5 sm:p-2 backdrop-blur-xl shadow-[0_4px_14px_rgba(0,0,0,0.12)] relative">
           {links.map((link) => {
             const isActive = pathname === link.href;
             const Icon = link.icon;
@@ -125,7 +125,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative flex flex-col items-center justify-center w-12 sm:w-14 h-14 z-10 transition-colors duration-300 ${
+                className={`visible-focus relative flex min-w-0 w-full flex-col items-center justify-center min-h-14 px-1 py-2 rounded-2xl z-10 transition-colors duration-300 ${
                   isActive ? "text-[var(--color-dark)]" : "text-white/60 hover:text-white"
                 }`}
                 aria-label={link.label}
@@ -134,15 +134,15 @@ export function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="active-mobile-indicator"
-                    className="absolute inset-0 rounded-full bg-[var(--color-primary)] shadow-md"
+                    className="absolute inset-0 rounded-2xl bg-[var(--color-primary)]"
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   />
                 )}
                 
                 {/* Ikon & Label */}
-                <span className="relative z-20 flex flex-col items-center gap-1">
+                <span className="relative z-20 flex w-full min-w-0 flex-col items-center gap-1">
                   <Icon size={isActive ? 20 : 22} strokeWidth={isActive ? 2.5 : 1.5} className="transition-all duration-300" />
-                  <span className={`text-[9px] tracking-wider uppercase font-medium transition-all duration-300 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 absolute bottom-0"}`}>
+                  <span className={`w-full text-center text-[9px] sm:text-[10px] leading-tight tracking-normal [overflow-wrap:anywhere] font-medium transition-all duration-300 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 absolute bottom-0"}`}>
                     {link.label}
                   </span>
                 </span>
