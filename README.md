@@ -1,4 +1,4 @@
-# NUSAKARYA
+# Mie Kopyok Pak Zain
 
 A premium landing page for an Indonesian UMKM ecosystem — built with Next.js 15 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui-style components, Lucide icons, and Framer Motion.
 
