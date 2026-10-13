@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   ...pageMetadata("/"),
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   applicationName: "Mie Kopyok Pak Zain",
+  icons: {
+    icon: { url: "/favicon-light.svg", type: "image/svg+xml" },
+    shortcut: "/favicon-light.svg",
+  },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
 };

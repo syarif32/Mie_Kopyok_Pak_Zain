@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Home, Utensils, BookOpen, Image as ImageIcon, Phone } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 
@@ -44,7 +45,8 @@ export function Navbar() {
               : "border-white/20 bg-black/20 backdrop-blur-md"
           }`}
         >
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" aria-label="Mie Kopyok Pak Zain — Beranda" className="visible-focus flex items-center gap-2">
+            <Image src="/favicon.svg" alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-full bg-[#F1E8DA]" />
             <span className="font-sans text-2xl italic text-white">Mie</span>
             <span className="text-xl font-bold tracking-widest text-white uppercase">
               Kopyok
@@ -96,7 +98,8 @@ export function Navbar() {
             : "bg-[var(--color-dark)]/85 backdrop-blur-md border-b border-white/10"
         }`}
       >
-        <Link href="/" className="flex items-center gap-1">
+        <Link href="/" aria-label="Mie Kopyok Pak Zain — Beranda" className="visible-focus flex items-center gap-1">
+          <Image src="/favicon.svg" alt="" width={40} height={40} className="mr-1 h-10 w-10 shrink-0 rounded-full bg-[#F1E8DA]" />
           <span className="font-sans text-2xl italic text-white">Mie</span>
           <span className="text-xl font-bold tracking-widest text-white uppercase">Kopyok</span>
         </Link>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 512 512"
+     fill="none">
+
+  <!-- Latar cerah agar favicon terlihat pada tab browser -->
+  <rect width="512" height="512" rx="96" fill="#F1E8DA"/>
+
+  <!-- Monumen geometris -->
+  <path
+    d="M 255 91
+       L 283 145
+       L 280 172
+       L 294 190
+       L 294 308
+       L 324 330
+       L 324 350
+       L 188 350
+       L 188 330
+       L 218 308
+       L 218 190
+       L 232 172
+       L 229 145 Z"
+    fill="#722D3E"/>
+
+  <!-- Sapuan mie terbuka -->
+  <path
+    d="M 117 267
+       C 103 322 140 380 197 406
+       C 264 436 354 402 389 340
+       C 403 315 407 291 400 264"
+    stroke="#C08A65"
+    stroke-width="29"
+    stroke-linecap="round"/>
+
+  <!-- Detail ruang kosong pada alas -->
+  <path
+    d="M 217 342 L 295 342"
+    stroke="#F1E8DA"
+    stroke-width="9"
+    stroke-linecap="round"/>
+
+</svg>
