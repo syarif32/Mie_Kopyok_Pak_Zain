@@ -82,6 +82,7 @@
 // }
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { AnimatedRoadmap } from "@/components/ui/animated-roadmap"; 
 import { Button } from "@/components/ui/button";
 
@@ -93,31 +94,38 @@ const bahanMieKopyok = [
 ];
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const entrance = (delay: number) => ({
+    initial: reduceMotion ? false as const : { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : delay },
+  });
+
   return (
     <section className="relative flex flex-col items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-40 md:pb-20">
       <div className="text-center max-w-3xl z-10 relative">
-        <span className="mb-6 inline-block rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-5 py-2 text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
+        <motion.span {...entrance(0)} className="mb-6 inline-block rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-5 py-2 text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
           Warisan Kuliner Autentik
-        </span>
+        </motion.span>
         
         {/* PERUBAHAN ADA DI SINI: Menambahkan pemanggilan font dan menghapus font-bold & uppercase */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-[var(--color-dark)] leading-tight">
+        <motion.h2 {...entrance(0.12)} className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-[var(--color-dark)] leading-tight">
           Kenali Lebih Dekat <br />
           <span className="text-[var(--color-primary)] italic">Kelezatan</span> Kami
-        </h2>
+        </motion.h2>
         
-        <p className="mt-5 text-base sm:text-lg text-[var(--color-dark)]/70 md:text-xl font-light">
+        <motion.p {...entrance(0.24)} className="mt-5 text-base sm:text-lg text-[var(--color-dark)]/70 md:text-xl font-light">
           Bedah setiap lapis kelezatan legendaris kami. Terbuat dari bahan-bahan pilihan yang diracik sempurna dengan kuah kaldu bawang yang menghangatkan jiwa.
-        </p>
+        </motion.p>
         
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <motion.div {...entrance(0.36)} className="mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <Button className="rounded-full bg-[var(--color-primary)] px-8 py-6 text-xs font-bold tracking-widest uppercase text-white shadow-lg transition-all hover:bg-[var(--color-primary)]/90 hover:scale-105">
             Pesan Sekarang
           </Button>
           <Button variant="secondary" className="rounded-full border-[var(--color-primary)] px-8 py-6 text-xs font-bold tracking-widest uppercase text-[var(--color-primary)] transition-all hover:bg-[var(--color-primary)]/10">
             Lihat Menu Lengkap
           </Button>
-        </div>
+        </motion.div>
       </div>
 
       <div className="w-full mt-10 md:mt-16 z-10">
