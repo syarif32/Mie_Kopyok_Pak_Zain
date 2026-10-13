@@ -37,7 +37,7 @@ export function Footer() {
             </p>
             <div className="text-sm leading-relaxed text-white/60">
               <p className="font-medium text-white">Jam Buka</p>
-              <p>Senin?Minggu, 09.00?16.00 WIB</p>
+              <p>Senin-Minggu, 09.00-16.00 WIB</p>
             </div>
           </div>
 
