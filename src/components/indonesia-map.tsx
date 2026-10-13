@@ -66,8 +66,8 @@ export function IndonesiaMap() {
   }, [isInView, animationKey]);
 
   return (
-    <section className="bg-[var(--color-dark)] py-28 relative z-20 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
+    <section className="bg-[var(--color-dark)] py-16 md:py-24 lg:py-28 relative z-20 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           eyebrow="Rasa Yang Mendunia"
           title="Tur Kuliner Menuju Semarang"
@@ -78,7 +78,7 @@ export function IndonesiaMap() {
 
         <div 
           ref={mapContainerRef} 
-          className="relative mt-16 w-full max-w-6xl mx-auto h-[500px] md:h-[650px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10"
+          className="relative mt-10 md:mt-14 w-full max-w-6xl mx-auto h-[400px] sm:h-[500px] lg:h-[650px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10"
         >
           <Map 
             theme="dark"

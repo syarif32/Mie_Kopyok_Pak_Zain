@@ -35,7 +35,7 @@ export function Navbar() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-        className="fixed inset-x-0 top-4 z-50 hidden md:flex justify-center px-4"
+        className="fixed inset-x-0 top-4 z-50 hidden xl:flex justify-center px-4"
       >
         <nav
           className={`flex w-full max-w-7xl items-center justify-between rounded-full border px-8 py-4 transition-all duration-500 ${
@@ -45,7 +45,7 @@ export function Navbar() {
           }`}
         >
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl italic text-white">Mie</span>
+            <span className="font-sans text-2xl italic text-white">Mie</span>
             <span className="text-xl font-bold tracking-widest text-white uppercase">
               Kopyok
             </span>
@@ -90,14 +90,14 @@ export function Navbar() {
           2. MOBILE TOP BAR (Solusi agar atas tidak kosong)
           ========================================= */}
       <header 
-        className={`md:hidden fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 ${
+        className={`xl:hidden fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 sm:px-6 py-4 transition-all duration-300 ${
           scrolled 
             ? "bg-[var(--color-dark)]/95 backdrop-blur-xl shadow-md border-b border-white/5" 
             : "bg-gradient-to-b from-black/60 to-transparent"
         }`}
       >
         <Link href="/" className="flex items-center gap-1">
-          <span className="font-serif text-2xl italic text-white">Mie</span>
+          <span className="font-sans text-2xl italic text-white">Mie</span>
           <span className="text-xl font-bold tracking-widest text-white uppercase">Kopyok</span>
         </Link>
         
@@ -105,7 +105,7 @@ export function Navbar() {
     href="https://wa.me/6289524570682?text=Halo%2C%20saya%20ingin%20pesan%20Mie%20Kopyok." 
     target="_blank" 
     rel="noopener noreferrer"
-    className="flex items-center justify-center w-full h-full px-5"
+    className="visible-focus inline-flex shrink-0 items-center justify-center min-h-11 rounded-full border border-white/20 bg-[var(--color-primary-dark)] px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[var(--color-dark)]"
   >
     Pesan
   </a>
@@ -115,7 +115,7 @@ export function Navbar() {
       {/* =========================================
           3. MOBILE BOTTOM NAV (Animasi Tab Bar)
           ========================================= */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-4 pt-8 px-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+      <div className="xl:hidden fixed bottom-0 inset-x-0 z-50 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-8 px-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
         <nav className="pointer-events-auto mx-auto flex w-full max-w-md items-center justify-between rounded-full border border-white/10 bg-[var(--color-dark)]/95 px-2 py-2 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] relative">
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -125,7 +125,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative flex flex-col items-center justify-center w-14 h-14 z-10 transition-colors duration-300 ${
+                className={`relative flex flex-col items-center justify-center w-12 sm:w-14 h-14 z-10 transition-colors duration-300 ${
                   isActive ? "text-[var(--color-dark)]" : "text-white/60 hover:text-white"
                 }`}
                 aria-label={link.label}

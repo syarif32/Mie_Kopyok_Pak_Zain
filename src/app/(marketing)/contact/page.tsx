@@ -43,19 +43,19 @@ export default function ContactPage() {
       <MagicCursor colors={["139 107 77", "166 98 31"]} />
       <Navbar />
 
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 max-w-7xl mx-auto w-full flex-grow flex flex-col">
+      <section className="relative pt-28 md:pt-40 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-grow flex flex-col">
         
         {/* --- BAGIAN JUDUL --- */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full mb-16 md:mb-24"
+          className="w-full mb-10 md:mb-16"
         >
           <span className="text-xs font-semibold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
             Mari Berbincang
           </span>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase text-[var(--color-dark)] leading-tight max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter uppercase text-[var(--color-dark)] leading-tight max-w-3xl">
             Hubungi <span className="text-[var(--color-primary)] lowercase emphasis">Kami</span>
           </h1>
           <p className="mt-6 text-[var(--color-dark)]/70 text-lg font-light max-w-xl leading-relaxed">
@@ -64,7 +64,7 @@ export default function ContactPage() {
         </motion.div>
 
         {/* --- BAGIAN KONTEN (GRID 2 KOLOM) --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
           {/* Kolom Kiri: Informasi Kontak */}
           <motion.div 
@@ -76,12 +76,12 @@ export default function ContactPage() {
             {contactDetails.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={index} className="group flex items-start gap-6">
+                <div key={index} className="group flex items-start gap-4 sm:gap-6">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-primary)]/5 text-[var(--color-primary)] transition-colors duration-300 group-hover:bg-[var(--color-primary)] group-hover:text-white">
                     <Icon size={24} strokeWidth={1.5} />
                   </div>
                   
-                  <div className="flex flex-col">
+                  <div className="flex min-w-0 flex-col break-words">
                     <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--color-dark)] mb-2">
                       {item.title}
                     </h3>
@@ -111,7 +111,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="lg:col-span-7 w-full h-[500px] lg:h-full min-h-[500px] rounded-[32px] overflow-hidden shadow-2xl border border-black/5 relative"
+            className="lg:col-span-7 w-full h-[320px] sm:h-[420px] lg:h-[500px] rounded-[32px] overflow-hidden shadow-2xl border border-black/5 relative"
           >
             {/* Latar belakang loading palsu sebelum iframe dimuat */}
             <div className="absolute inset-0 bg-gray-200 animate-pulse -z-10" />
@@ -128,7 +128,7 @@ export default function ContactPage() {
             />
             
             {/* Elemen desain kecil melayang di atas peta */}
-            <div className="absolute bottom-6 left-6 right-6 md:right-auto bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+            <div className="absolute bottom-4 left-4 right-4 md:right-auto bg-white/90 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-xl">
               <span className="flex items-center gap-3">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-primary)] opacity-75"></span>

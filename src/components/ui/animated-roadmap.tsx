@@ -34,7 +34,7 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: milestone.id * 0.3, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.8 }}
-      className="absolute flex items-center gap-4 z-20"
+      className="absolute flex items-center gap-1.5 sm:gap-4 z-20"
       style={milestone.position}
     >
       <div className="relative flex h-8 w-8 items-center justify-center">
@@ -46,7 +46,7 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
         />
         <div className="absolute h-full w-full rounded-full bg-[var(--color-primary)]/20" />
       </div>
-      <div className="rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-4 py-2 text-sm font-bold tracking-wider uppercase text-white shadow-xl">
+      <div className="rounded-full border border-white/20 bg-black/60 backdrop-blur-md max-w-[120px] sm:max-w-none px-2 sm:px-4 py-1.5 sm:py-2 text-[9px] sm:text-sm font-bold tracking-wider uppercase text-white shadow-xl">
         {milestone.name}
       </div>
     </motion.div>
@@ -68,7 +68,7 @@ const AnimatedRoadmap = React.forwardRef<HTMLDivElement, AnimatedRoadmapProps>(
         ref={targetRef}
         // UBAHAN UTAMA: Menambahkan 'aspect-square' untuk rasio 1:1
         // dan mengubah 'max-w-5xl' menjadi 'max-w-3xl' agar kotaknya proporsional di desktop
-        className={cn("relative w-full max-w-3xl mx-auto my-10 aspect-square", className)}
+        className={cn("relative w-full max-w-3xl mx-auto my-4 md:my-10 aspect-square", className)}
         {...props}
       >
         <motion.div

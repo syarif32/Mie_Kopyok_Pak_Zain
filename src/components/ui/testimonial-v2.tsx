@@ -107,7 +107,7 @@ const TestimonialsColumn = (props: {
                     boxShadow: "0 25px 50px -12px rgba(29, 29, 29, 0.12)",
                     transition: { type: "spring", stiffness: 400, damping: 17 }
                   }}
-                  className="p-8 rounded-[24px] border border-[var(--color-primary)]/15 shadow-nk-card max-w-xs w-full bg-white transition-all duration-300 cursor-default select-none group focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/30" 
+                  className="p-6 lg:p-8 rounded-[24px] border border-[var(--color-primary)]/15 shadow-nk-card max-w-xs w-full bg-white transition-all duration-300 cursor-default select-none group focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/30"
                 >
                   <blockquote className="m-0 p-0">
                     <p className="text-[var(--color-dark)]/80 leading-relaxed font-normal m-0 text-sm">
@@ -145,21 +145,21 @@ export function TestimonialsV2() {
   return (
     <section 
       aria-labelledby="testimonials-heading"
-      className="py-28 relative overflow-hidden bg-[var(--color-cream)]"
+      className="py-16 md:py-24 lg:py-28 relative overflow-hidden bg-[var(--color-cream)]"
     >
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-7xl px-6 mx-auto"
+        className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto"
       >
-        <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-16 text-center">
+        <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-10 md:mb-16 text-center">
           <span className="mb-4 inline-block rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-4 py-1.5 text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
             Testimonials
           </span>
 
-          <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-medium tracking-tight text-[var(--color-dark)]">
+          <h2 id="testimonials-heading" className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--color-dark)]">
             What Our <span className="emphasis text-[var(--color-primary)]">Customers</span> Say
           </h2>
           <p className="mt-4 text-[var(--color-dark)]/70 text-base md:text-lg leading-relaxed">

@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export function Story() {
   return (
-    <section id="cerita" className="mx-auto max-w-7xl px-6 py-28 relative z-20">
-      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <section id="cerita" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28 relative z-20">
+      <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-20">
         
         {/* Kolom Kiri: Gambar Momen Memasak / Dapur */}
         <motion.div
@@ -41,13 +41,13 @@ export function Story() {
             Filosofi Rasa
           </span>
           
-          <h2 className="text-4xl font-bold leading-[1.1] text-[var(--color-dark)] sm:text-5xl uppercase tracking-tighter">
+          <h2 className="text-3xl font-bold leading-[1.1] text-[var(--color-dark)] sm:text-5xl uppercase tracking-tighter">
             Setiap Piring
             <br />
             Menyimpan <span className="emphasis text-[var(--color-primary)] lowercase">Cerita</span>.
           </h2>
           
-          <p className="text-lg leading-relaxed text-[var(--color-dark)]/70 font-light">
+          <p className="text-base sm:text-lg leading-relaxed text-[var(--color-dark)]/70 font-light">
             Di balik kepekatan kuah kaldu bawang dan renyahnya kerupuk gendar, terdapat dedikasi panjang merawat resep leluhur. Kami mempertahankan metode memasak lambat dan pemilihan rempah segar yang diturunkan dari generasi ke generasi.
           </p>
           

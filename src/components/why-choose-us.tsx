@@ -27,7 +27,7 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28">
       <SectionHeading
         eyebrow="Keunggulan Kami"
         title="Kenapa Harus Kami?"
@@ -36,7 +36,7 @@ export function WhyChooseUs() {
         className="mx-auto"
       />
 
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="mt-10 md:mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {reasons.map((reason, index) => {
           const Icon = reason.icon;
           return (
@@ -46,7 +46,7 @@ export function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="flex flex-col items-start gap-5 rounded-[var(--radius-nk-sm)] bg-white p-9 shadow-nk-card border border-[var(--color-primary)]/10"
+              className="flex flex-col items-start gap-5 rounded-[var(--radius-nk-sm)] bg-white p-6 xl:p-9 shadow-nk-card border border-[var(--color-primary)]/10"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
                 <Icon size={24} />

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function Cta() {
   return (
-    <section className="px-6 py-12">
+    <section className="px-4 sm:px-6 lg:px-8 py-10 md:py-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -14,7 +14,7 @@ export function Cta() {
         transition={{ duration: 0.8 }}
         className="relative mx-auto max-w-7xl overflow-hidden rounded-[var(--radius-nk-lg)] shadow-nk-soft"
       >
-        <div className="relative flex min-h-[460px] items-center justify-center px-6 py-20 text-center">
+        <div className="relative flex min-h-[380px] md:min-h-[460px] items-center justify-center px-5 sm:px-8 py-12 md:py-20 text-center">
           {/* Background Image: Menggunakan foto nuansa kuliner/hangat yang menggugah selera */}
           <Image
             src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
@@ -30,7 +30,7 @@ export function Cta() {
               Cita Rasa Legendaris
             </span>
 
-            <h2 className="text-4xl font-medium leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h2 className="text-3xl font-medium leading-[1.1] text-white sm:text-5xl md:text-6xl">
               Siap Menikmati Kehangatan <br />
               <span className="emphasis text-[var(--color-primary)]">Mie Kopyok</span> Kami?
             </h2>

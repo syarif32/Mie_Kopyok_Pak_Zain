@@ -94,23 +94,23 @@ const bahanMieKopyok = [
 
 export function Hero() {
   return (
-    <section className="relative flex flex-col items-center px-6 pt-32 pb-16 md:pt-40 md:pb-24">
+    <section className="relative flex flex-col items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-40 md:pb-20">
       <div className="text-center max-w-3xl z-10 relative">
         <span className="mb-6 inline-block rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-5 py-2 text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
           Warisan Kuliner Autentik
         </span>
         
         {/* PERUBAHAN ADA DI SINI: Menambahkan pemanggilan font dan menghapus font-bold & uppercase */}
-        <h2 className="text-4xl md:text-5xl font-serif tracking-tight text-[var(--color-dark)] leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-[var(--color-dark)] leading-tight">
           Kenali Lebih Dekat <br />
           <span className="text-[var(--color-primary)] italic">Kelezatan</span> Kami
         </h2>
         
-        <p className="mt-6 text-lg text-[var(--color-dark)]/70 md:text-xl font-light">
+        <p className="mt-5 text-base sm:text-lg text-[var(--color-dark)]/70 md:text-xl font-light">
           Bedah setiap lapis kelezatan legendaris kami. Terbuat dari bahan-bahan pilihan yang diracik sempurna dengan kuah kaldu bawang yang menghangatkan jiwa.
         </p>
         
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <Button className="rounded-full bg-[var(--color-primary)] px-8 py-6 text-xs font-bold tracking-widest uppercase text-white shadow-lg transition-all hover:bg-[var(--color-primary)]/90 hover:scale-105">
             Pesan Sekarang
           </Button>
@@ -120,7 +120,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="w-full mt-16 md:mt-24 z-10">
+      <div className="w-full mt-10 md:mt-16 z-10">
         <AnimatedRoadmap
           milestones={bahanMieKopyok}
           mapImageSrc="/images/ko.png" 

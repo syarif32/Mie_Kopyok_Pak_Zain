@@ -29,12 +29,12 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="bg-dark px-6 pb-10 pt-24 text-white">
+    <footer className="bg-dark px-4 sm:px-6 lg:px-8 pb-[calc(8rem+env(safe-area-inset-bottom))] xl:pb-10 pt-16 md:pt-24 text-white">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.4fr_2fr]">
+        <div className="grid grid-cols-1 gap-10 lg:gap-14 lg:grid-cols-[1.4fr_2fr]">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-2">
-              <span className="font-serif text-2xl italic">Mie Kopyok </span>
+              <span className="font-sans text-2xl italic">Mie Kopyok </span>
               <span className="text-xl font-semibold">Pak Zain</span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-white/60">
@@ -67,7 +67,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
             {columns.map((col) => (
               <div key={col.title} className="flex flex-col gap-4">
                 <h4 className="text-sm font-medium text-white">{col.title}</h4>
@@ -88,10 +88,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 sm:flex-row">
+        <div className="mt-10 md:mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 text-center sm:text-left sm:flex-row">
           <p>© 2026 MIE KOPYOK PAK ZAIN. Created by <a href="https://zaeeon-site.vercel.app" target="_blank" rel="noopener noreferrer" className="visible-focus hover:text-white/100">Muhammad Najwa Syarif</a></p>
           
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
             <a href="#" className="visible-focus hover:text-white/70">
               Privacy Policy
             </a>

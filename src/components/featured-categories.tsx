@@ -48,7 +48,7 @@ function KartuKategori({ category, index }: { category: Kategori; index: number 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: (index % 4) * 0.08 }}
-      className="group relative flex h-[380px] flex-col justify-end overflow-hidden rounded-[32px] shadow-2xl"
+      className="group relative flex h-[320px] sm:h-[380px] flex-col justify-end overflow-hidden rounded-[32px] shadow-2xl"
     >
       <Image
         src={category.image}
@@ -58,7 +58,7 @@ function KartuKategori({ category, index }: { category: Kategori; index: number 
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-      <div className="relative z-10 flex items-end justify-between gap-4 p-7">
+      <div className="relative z-10 flex items-end justify-between gap-3 p-5 xl:p-7">
         <div>
           <h3 className="text-2xl font-medium text-white">{category.title}</h3>
           <p className="mt-2 max-w-[240px] text-sm text-white/80 leading-relaxed">
@@ -78,7 +78,7 @@ function KartuKategori({ category, index }: { category: Kategori; index: number 
 
 export function FeaturedCategories() {
   return (
-    <section id="kategori" className="mx-auto max-w-7xl px-6 py-28 w-full relative z-20">
+    <section id="kategori" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-28 w-full relative z-20">
       <SectionHeading
         eyebrow="Jelajahi Selera"
         title="Ragam Rasa Istimewa"
@@ -87,7 +87,7 @@ export function FeaturedCategories() {
       />
       
       {/* Grid disesuaikan menjadi 2 kolom untuk tablet dan 4 kolom untuk layar besar */}
-      <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 md:mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {kategoriMenu.map((kategori, index) => (
           <KartuKategori key={kategori.id} category={kategori} index={index} />
         ))}

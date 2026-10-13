@@ -35,7 +35,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   }, [inView, value]);
 
   return (
-    <span ref={ref} className="text-5xl font-bold text-[var(--color-primary)] sm:text-6xl tracking-tighter">
+    <span ref={ref} className="text-4xl font-bold text-[var(--color-primary)] sm:text-6xl tracking-tighter">
       {formatValue(display)}
       <span className="text-3xl sm:text-4xl text-white ml-1">{suffix}</span>
     </span>
@@ -44,11 +44,11 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function Statistics() {
   return (
-    <section className="bg-[var(--color-dark)] py-24 border-y border-white/10 relative z-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-[var(--color-dark)] py-16 md:py-24 border-y border-white/10 relative z-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Tambahan Judul Kecil agar bagian ini tidak terlalu sepi */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase">
             Jejak Rasa Kami
           </span>
@@ -57,7 +57,7 @@ export function Statistics() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-12 sm:grid-cols-4 md:gap-10">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-10">
           {statistikWarung.map((stat, index) => (
             <motion.div
               key={stat.id}

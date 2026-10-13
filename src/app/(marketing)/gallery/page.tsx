@@ -88,7 +88,7 @@ function KateringCard({
   const cardScale = useTransform(progress, range, [1, targetScale]);
 
   return (
-    <div ref={container} className="h-screen flex items-center justify-center sticky top-0">
+    <div ref={container} className="h-[100svh] flex items-start justify-center pt-[calc(5vh+1.5rem)] md:pt-[calc(5vh+2rem)] sticky top-24 xl:top-28">
       <motion.div
         style={{
           backgroundColor: color,
@@ -96,12 +96,12 @@ function KateringCard({
           top: `calc(-5vh + ${i * 30}px)` 
         }}
         // Teks di dalam kartu tetap putih karena warna kartunya gelap
-        className="flex flex-col relative h-[450px] w-[90%] max-w-5xl rounded-3xl p-8 md:p-10 origin-top shadow-[0_-15px_40px_rgba(0,0,0,0.1)] border border-white/20 text-white"
+        className="flex flex-col relative h-[450px] max-h-[70svh] md:max-h-[75svh] w-full md:w-[90%] max-w-5xl rounded-3xl p-5 md:p-10 overflow-y-auto origin-top shadow-[0_-15px_40px_rgba(0,0,0,0.1)] border border-white/20 text-white"
       >
-        <h2 className="text-2xl text-center font-bold uppercase tracking-wider">{title}</h2>
-        <div className="flex flex-col md:flex-row h-full mt-5 gap-6 md:gap-10 items-center">
-          <div className="w-full md:w-[40%] flex flex-col justify-center md:justify-start h-full pt-4">
-            <p className="text-sm font-light text-white/90 leading-relaxed mb-6">{description}</p>
+        <h2 className="text-lg sm:text-2xl text-center font-bold uppercase tracking-wider">{title}</h2>
+        <div className="flex flex-col md:flex-row min-h-0 flex-1 mt-4 gap-4 md:gap-10 items-center">
+          <div className="w-full md:w-[40%] flex flex-col justify-center md:justify-start shrink-0 md:h-full md:pt-4">
+            <p className="text-sm font-light text-white/90 leading-relaxed mb-3 md:mb-6">{description}</p>
             <span className="flex items-center gap-2 group mt-auto md:mt-0 pb-4 md:pb-0">
               <a
                 href="https://wa.me/6281234567890"
@@ -127,7 +127,7 @@ function KateringCard({
             </span>
           </div>
 
-          <div className="relative w-full md:w-[60%] h-48 md:h-full rounded-2xl overflow-hidden shadow-xl">
+          <div className="relative w-full md:w-[60%] h-36 sm:h-48 md:h-full shrink-0 rounded-2xl overflow-hidden shadow-xl">
             <motion.div className="w-full h-full" style={{ scale: imageScale }}>
               <img src={url} alt={title} className="absolute inset-0 w-full h-full object-cover" />
             </motion.div>
@@ -154,7 +154,7 @@ export default function GalleryPage() {
          <MagicCursor colors={["139 107 77", "166 98 31"]} />
         <Navbar />
 
-        <div className="relative pt-40 pb-10 w-full flex flex-col items-center">
+        <div className="relative pt-28 md:pt-40 pb-6 md:pb-8 w-full flex flex-col items-center">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none z-0">
             {/* Watermark diubah warnanya agar terlihat halus di atas warna terang */}
             <h1 className="text-[15vw] font-bold tracking-tighter whitespace-nowrap text-[var(--color-dark)] opacity-5">
@@ -169,7 +169,7 @@ export default function GalleryPage() {
               transition={{ duration: 0.7 }}
               className="text-center mb-6 px-6"
             >
-              <h3 className="text-5xl md:text-5xl font-bold tracking-tighter uppercase">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tighter uppercase">
                 Menerima Pesanan <span className="emphasis text-[var(--color-primary)] lowercase">Sesuai Request Anda</span>
               </h3>
             </motion.div>
@@ -178,7 +178,7 @@ export default function GalleryPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-[var(--color-dark)]/60 tracking-widest uppercase text-sm mb-16 px-6 text-center"
+              className="text-[var(--color-dark)]/60 tracking-widest uppercase text-xs sm:text-sm mb-10 md:mb-16 px-4 sm:px-6 text-center"
             >
               Geser untuk menjelajahi kelezatan
             </motion.p>
@@ -187,7 +187,7 @@ export default function GalleryPage() {
               <RollingGallery images={galleryImages} autoplay={true} pauseOnHover={true} />
             </div>
 
-            <div className="mt-20 max-w-2xl text-center px-6">
+            <div className="mt-6 md:mt-10 max-w-2xl text-center px-4 sm:px-6">
               <p className="text-lg text-[var(--color-dark)]/80 font-light leading-relaxed">
                 Kelezatan warisan ini tidak hanya bisa dinikmati di tempat kami, tetapi juga siap menyempurnakan setiap momen berharga Anda.
               </p>
@@ -196,15 +196,15 @@ export default function GalleryPage() {
         </div>
 
         {/* Latar belakang grid disesuaikan dengan warna cokelat lembut */}
-        <section className='py-20 md:py-32 w-full flex items-center justify-center relative shrink-0 z-10'>
+        <section className='pt-6 md:pt-8 pb-0 w-full flex items-center justify-center relative shrink-0 z-10'>
           <div className='absolute inset-0 bg-[linear-gradient(to_right,#8B6B4D20_1px,transparent_1px),linear-gradient(to_bottom,#8B6B4D20_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'></div>
-          <h2 className='2xl:text-7xl text-5xl px-8 font-bold text-center tracking-tight uppercase leading-[120%] relative z-10'>
-            Menu <span className="emphasis text-[var(--color-primary)] lowercase">Pesanan</span>
+          <h2 className='mx-auto flex max-w-5xl flex-wrap items-baseline justify-center gap-x-2 sm:gap-x-3 gap-y-1 px-4 sm:px-6 text-3xl sm:text-4xl lg:text-5xl font-semibold text-center tracking-tight leading-tight relative z-10'>
+            Menu <span className="emphasis text-[var(--color-primary)]">Pesanan</span>
           </h2>
         </section>
 
         {/* Latar belakang kartu sekarang transparan (mengikuti warna cream) */}
-        <section className="w-full relative z-20 px-4 md:px-0 pb-32">
+        <section className="w-full relative z-20 px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
           {menuKateringData.map((project, i) => {
             const targetScale = 1 - (menuKateringData.length - i) * 0.02; 
             return (

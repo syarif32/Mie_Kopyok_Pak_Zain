@@ -17,7 +17,7 @@
   --radius-nk-lg: 48px;
 
   /* ---- Type (Disambung ke Poppins) ---- */
-  --font-sans: var(--font-poppins);
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Shadows ---- */
   --shadow-nk-soft: 0 20px 60px -20px rgba(29, 29, 29, 0.18);
@@ -29,7 +29,7 @@ html {
 }
 
 /* PAKSA SEMUA ELEMEN MENGGUNAKAN POPPINS */
-*, body, h1, h2, h3, h4, h5, h6, p, span, button, input {
+*, *::before, *::after {
   font-family: var(--font-sans) !important;
 }
 

@@ -20,22 +20,22 @@ export default function CeritaPage() {
       
       <Navbar />
 
-      <section className="relative pt-40 pb-20 px-6 max-w-5xl mx-auto flex-grow flex flex-col items-center justify-center">
+      <section className="relative w-full pt-28 md:pt-40 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex-grow flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <span className="text-xs font-semibold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-6 block">
             Jejak Langkah
           </span>
-          <h3 className="text-5xl md:text-7xl font-semibold tracking-tighter uppercase text-[var(--color-dark)] leading-tight">
+          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tighter uppercase text-[var(--color-dark)] leading-tight">
             Kisah <span className="text-[var(--color-primary)] lowercase emphasis">Sebuah</span> Rasa
           </h3>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -54,7 +54,7 @@ export default function CeritaPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col gap-6 text-[var(--color-dark)]/80 text-lg font-light leading-relaxed"
+            className="flex flex-col gap-6 text-[var(--color-dark)]/80 text-base sm:text-lg font-light leading-relaxed"
           >
             <p>
               Berawal dari sebuah dapur kecil dan resep sederhana yang diwariskan secara turun-temurun, keluarga kami memulai perjalanan meracik kelezatan yang kini Anda kenal. 

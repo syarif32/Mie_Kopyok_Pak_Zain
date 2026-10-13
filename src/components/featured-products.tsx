@@ -65,7 +65,7 @@ function MenuCard({ menu, index, onViewDetail }: { menu: DatabaseMenu; index: nu
         </button>
 
         {/* Tombol Lihat Detail */}
-        <div className="absolute inset-x-4 bottom-4 flex translate-y-3 justify-center opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-10">
+        <div className="absolute inset-x-4 bottom-4 flex md:translate-y-3 justify-center opacity-100 md:opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-10">
           <button 
             onClick={() => onViewDetail(menu)}
             className="visible-focus flex items-center gap-2 rounded-full bg-white/90 px-4 py-2.5 text-xs font-medium text-[var(--color-dark)] backdrop-blur-md hover:bg-white shadow-sm"
@@ -76,7 +76,7 @@ function MenuCard({ menu, index, onViewDetail }: { menu: DatabaseMenu; index: nu
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-6">
+      <div className="flex flex-1 flex-col gap-2 p-5 md:p-6">
         <span className="text-xs tracking-wide text-gray-500 uppercase">{categoryName}</span>
         <h3 className="text-base font-medium leading-snug text-[var(--color-dark)]">
           {menu.name}
@@ -144,8 +144,8 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
 
   return (
     <>
-      <section id="menu-list" className="w-full max-w-7xl mx-auto px-6 py-28 relative">
-        <div className="flex flex-col items-center text-center gap-6 mb-16">
+      <section id="menu-list" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative">
+        <div className="flex flex-col items-center text-center gap-5 mb-10 md:mb-14">
           <SectionHeading
             eyebrow="Sajian Utama"
             title="Warisan Rasa Dalam Semangkuk Cerita"
@@ -153,10 +153,10 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
             description=""
           />
 
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
             <button
               onClick={() => setActiveCategory("all")}
-              className={`px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
                 activeCategory === "all"
                   ? "bg-[var(--color-primary)] text-white shadow-md"
                   : "bg-white/10 text-[var(--color-dark)] hover:bg-white/50 border border-black/5"
@@ -169,7 +169,7 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.slug)}
-                className={`px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
+                className={`px-4 sm:px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
                   activeCategory === category.slug
                     ? "bg-[var(--color-primary)] text-white shadow-md"
                     : "bg-white text-[var(--color-dark)] hover:bg-gray-50 border border-black/5"
@@ -181,7 +181,7 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
           </div>
         </div>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 items-start">
           <AnimatePresence>
             {displayMenus.map((menu, index) => (
               <MenuCard 
@@ -224,7 +224,7 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-4xl bg-white rounded-[32px] overflow-hidden shadow-2xl z-10 flex flex-col md:flex-row max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-white rounded-[32px] overflow-hidden shadow-2xl z-10 flex flex-col md:flex-row max-h-[90dvh] overflow-y-auto md:overflow-y-hidden"
             >
               {/* Tombol Tutup Silang (X) */}
               <button
@@ -235,7 +235,7 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
               </button>
 
               {/* Area Gambar Kiri (Rasio Kotak) */}
-              <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:h-auto bg-gray-100 shrink-0">
+              <div className="relative w-full md:w-1/2 h-48 sm:h-64 md:aspect-auto md:h-auto bg-gray-100 shrink-0">
                 <Image
                   src={selectedMenu.image_url || "https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=800&auto=format&fit=crop"}
                   alt={selectedMenu.name}
@@ -245,12 +245,12 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
               </div>
 
               {/* Area Konten Kanan */}
-              <div className="flex flex-col w-full md:w-1/2 p-8 md:p-10 overflow-y-auto">
+              <div className="flex flex-col w-full md:w-1/2 min-h-0 p-5 sm:p-8 md:p-10 md:overflow-y-auto">
                 <span className="text-xs tracking-widest text-[var(--color-primary)] uppercase font-semibold mb-2">
                   {selectedMenu.menu_categories?.name || "Lainnya"}
                 </span>
                 
-                <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-dark)] mb-4 leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--color-dark)] mb-4 leading-tight">
                   {selectedMenu.name}
                 </h2>
 

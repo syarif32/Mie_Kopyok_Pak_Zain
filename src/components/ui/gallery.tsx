@@ -114,10 +114,10 @@ export const RollingGallery: React.FC<RollingGalleryProps> = ({
   };
 
   return (
-    <div className="relative h-[500px] w-full overflow-hidden">
+    <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full overflow-hidden">
       {/* Warna gelap telah diganti ke cream agar menyatu sempurna dengan latar halaman */}
-      <div className="absolute top-0 left-0 h-full w-[100px] z-10 pointer-events-none bg-gradient-to-l from-transparent to-[var(--color-cream)]" />
-      <div className="absolute top-0 right-0 h-full w-[100px] z-10 pointer-events-none bg-gradient-to-r from-transparent to-[var(--color-cream)]" />
+      <div className="absolute top-0 left-0 h-full w-8 sm:w-[100px] z-10 pointer-events-none bg-gradient-to-l from-transparent to-[var(--color-cream)]" />
+      <div className="absolute top-0 right-0 h-full w-8 sm:w-[100px] z-10 pointer-events-none bg-gradient-to-r from-transparent to-[var(--color-cream)]" />
       
       <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
         <motion.div

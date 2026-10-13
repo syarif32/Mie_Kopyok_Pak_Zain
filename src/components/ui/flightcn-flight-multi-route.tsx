@@ -78,29 +78,20 @@ const MapContext = createContext<MapContextValue>({
   loaded: false,
 });
 
-// const STYLES: Record<"dark" | "light", string> = {
-//   dark: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-//   light: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-// };
 const OSM_STYLE = {
   version: 8,
   sources: {
-    "carto-dark": {
+    "osm-tiles": {
       type: "raster",
-      tiles: [
-        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-      ],
+      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
       tileSize: 256,
-      attribution: "© OpenStreetMap © CARTO",
+      attribution: "© OpenStreetMap contributors",
     },
   },
-  layers: [{ id: "carto-dark-tiles", type: "raster", source: "carto-dark" }],
-};
+  layers: [{ id: "osm-tiles-layer", type: "raster", source: "osm-tiles" }],
+} satisfies MapLibreGLType.StyleSpecification;
 
-// Kita paksa peta menggunakan OSM dan ubah tipe menjadi 'any' agar tidak error
-const STYLES: Record<"dark" | "light", any> = {
+const STYLES: Record<"dark" | "light", MapLibreGLType.StyleSpecification> = {
   dark: OSM_STYLE,
   light: OSM_STYLE,
 };
@@ -145,7 +136,7 @@ export function Map({
         minZoom,
         maxZoom,
         maxBounds: maxBounds as MapLibreGLType.LngLatBoundsLike | undefined,
-        attributionControl: false,
+        attributionControl: {},
         dragRotate: interactive,
         dragPan: interactive,
         scrollZoom: interactive,
