@@ -66,6 +66,10 @@ interface FlightMultiRouteProps {
   showAirports?: boolean;
   planeIconColor?: string;
   animate?: FlightAnimateOptions | false;
+  followPlane?: boolean;
+  onDestinationChange?: (index: number | null) => void;
+  onComplete?: () => void;
+  overview?: { center: LngLat; zoom: number };
 }
 
 /* ------------------------------------------------------------------ */
@@ -290,6 +294,10 @@ export function FlightMultiRoute({
   showAirports = false,
   planeIconColor = "#ffffff",
   animate = false,
+  followPlane = false,
+  onDestinationChange,
+  onComplete,
+  overview,
 }: FlightMultiRouteProps) {
   const { map, maplibregl, loaded } = useContext(MapContext);
   const uid = useId().replace(/:/g, "");
@@ -298,6 +306,25 @@ export function FlightMultiRoute({
   const airportLayerId = `flightcn-route-airports-${uid}`;
   const planeMarkerRef = useRef<MapLibreGLType.Marker | null>(null);
   const rafRef = useRef<number | null>(null);
+  const followPlaneRef = useRef(followPlane);
+  const cameraRef = useRef<MapLibreGLType.JumpToOptions | null>(null);
+  const callbacksRef = useRef({ onDestinationChange, onComplete });
+  useEffect(() => {
+    callbacksRef.current = { onDestinationChange, onComplete };
+  }, [onDestinationChange, onComplete]);
+
+  // Update camera mode independently so switching never restarts the flight.
+  useEffect(() => {
+    const wasFollowing = followPlaneRef.current;
+    followPlaneRef.current = followPlane;
+    if (!map || !loaded) return;
+
+    if (followPlane && planeMarkerRef.current) {
+      map.jumpTo(cameraRef.current ?? { center: planeMarkerRef.current.getLngLat(), zoom: 3.2 });
+    } else if (wasFollowing && !followPlane && overview) {
+      map.jumpTo({ center: overview.center, zoom: overview.zoom, padding: { top: 0, bottom: 0, left: 0, right: 0 } });
+    }
+  }, [map, loaded, followPlane, overview]);
 
   useEffect(() => {
     if (!map || !maplibregl || !loaded || waypoints.length < 2) return;
@@ -367,10 +394,14 @@ export function FlightMultiRoute({
         .setLngLat(waypoints[0])
         .addTo(map);
       planeMarkerRef.current = marker;
+      if (followPlaneRef.current) {
+        map.jumpTo({ center: waypoints[0], zoom: 3.2 });
+      }
 
       const cycleDuration = roundTrip ? duration * 2 : duration;
       const startTime = performance.now() + delay;
       let stopped = false;
+      let lastDestination: number | null = null;
 
       const tick = (now: number) => {
         if (stopped) return;
@@ -393,10 +424,47 @@ export function FlightMultiRoute({
 
         const { point, heading } = pointAtDistance(waypoints, cumulative, total, t * total);
         marker.setLngLat(point);
+        // Briefly frame each city using the actual flight progress, not separate timers.
+        const flightTime = t * duration;
+        let destination: number | null = null;
+        let framing = 0;
+        for (let i = 0; i < cumulative.length; i++) {
+          const arrival = total > 0 ? (cumulative[i] / total) * duration : 0;
+          const delta = flightTime - arrival;
+          const finalStop = i === waypoints.length - 1;
+          const strength = delta < 0
+            ? Math.max(0, 1 + delta / 650)
+            : finalStop ? 1 : Math.max(0, 1 - delta / 1100);
+          if (strength > framing) {
+            framing = strength;
+            destination = i;
+          }
+        }
+        framing = framing * framing * (3 - 2 * framing);
+        if (destination !== lastDestination) {
+          lastDestination = destination;
+          callbacksRef.current.onDestinationChange?.(destination);
+        }
+        {
+          const finalStop = destination === waypoints.length - 1;
+          const city = destination === null ? point : waypoints[destination];
+          const center: LngLat = [
+            point[0] + (city[0] - point[0]) * framing,
+            point[1] + (city[1] - point[1]) * framing,
+          ];
+          cameraRef.current = {
+            center,
+            zoom: 3.2 - framing * (finalStop ? 0.8 : 0.35),
+            // Popup cards sit above their marker; reserve screen space above it.
+            padding: { top: Math.min(finalStop ? 280 : 150, map.getContainer().clientHeight - 100) * framing, bottom: 0, left: 0, right: 0 },
+          };
+          if (followPlaneRef.current) map.jumpTo(cameraRef.current);
+        }
         planeEl.style.transform = `${planeEl.style.transform.replace(/rotate\([^)]*\)/, "")} rotate(${heading}deg)`;
         planeEl.querySelector("svg")!.style.transform = `rotate(${heading}deg)`;
 
         if (finished) {
+          callbacksRef.current.onComplete?.();
           return;
         }
         rafRef.current = requestAnimationFrame(tick);

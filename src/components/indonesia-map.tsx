@@ -30,40 +30,21 @@ const destinasiDunia = [
 const ruteTurDunia: [number, number][] = destinasiDunia.map(dest => [dest.lng, dest.lat]);
 const DURASI_TERBANG = 18000; // Total 18 detik perjalanan
 const JEDA_SEMARANG = 4000;   // 4 detik diam di Semarang sebelum muter ulang
+const MAP_OVERVIEW = { center: [95.0, 15.0] as [number, number], zoom: 1.6 };
 
 export function IndonesiaMap() {
+  const [followPlane, setFollowPlane] = useState(true);
   const [active, setActive] = useState<string | null>(null);
   const [animationKey, setAnimationKey] = useState(0); // Pemicu restart animasi tanpa error TypeScript
   
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(mapContainerRef, { once: true, margin: "-100px" });
 
-  // MESIN WAKTU & LOOPING OTOMATIS
-  useEffect(() => {
-    if (!isInView) return;
+  const restartTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (restartTimer.current) clearTimeout(restartTimer.current);
+  }, []);
 
-    const timers: NodeJS.Timeout[] = [];
-    
-    // 1. Jalankan popup kota berdasar delay
-    destinasiDunia.forEach((dest) => {
-      const t = setTimeout(() => {
-        setActive(dest.id);
-      }, dest.delay);
-      timers.push(t);
-    });
-
-    // 2. Looping otomatis: Setelah terbang (18 detik) + diam (4 detik), reset key untuk ulang dari awal
-    const totalSiklus = DURASI_TERBANG + JEDA_SEMARANG;
-    const tLoop = setTimeout(() => {
-      setActive(null);
-      setAnimationKey((prev) => prev + 1); // Me-restart komponen peta secara bersih
-    }, totalSiklus);
-    timers.push(tLoop);
-
-    return () => {
-      timers.forEach(clearTimeout);
-    };
-  }, [isInView, animationKey]);
 
   return (
     <section className="bg-[var(--color-dark)] py-16 md:py-24 lg:py-28 relative z-20 overflow-hidden">
@@ -76,19 +57,45 @@ export function IndonesiaMap() {
           light
         />
 
+        <div className="mx-auto mt-6 flex max-w-6xl flex-wrap items-center justify-end gap-3 text-sm text-white">
+          <span id="flight-camera-label">Ikuti pesawat</span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={followPlane}
+            aria-labelledby="flight-camera-label"
+            onClick={() => setFollowPlane((previous) => !previous)}
+            className={`visible-focus inline-flex min-h-11 items-center gap-3 rounded-full border px-4 py-2 transition-colors ${followPlane ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white" : "border-white/30 bg-white/10 text-white"}`}
+          >
+            <span aria-hidden="true" className="relative h-5 w-9 rounded-full bg-black/25">
+              <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${followPlane ? "translate-x-[18px]" : "translate-x-0.5"} left-0`} />
+            </span>
+            {followPlane ? "Aktif" : "Nonaktif"}
+          </button>
+        </div>
+
         <div 
           ref={mapContainerRef} 
           className="relative mt-10 md:mt-14 w-full max-w-6xl mx-auto h-[400px] sm:h-[500px] lg:h-[650px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10"
         >
           <Map 
             theme="dark"
-            center={[95.0, 15.0]} 
-            zoom={1.6}
+            center={MAP_OVERVIEW.center}
+            zoom={MAP_OVERVIEW.zoom}
             interactive={true}
           >
             {/* Menggunakan key={animationKey} agar rute ter-reset total saat waktunya looping */}
             <FlightMultiRoute
               key={animationKey}
+              followPlane={followPlane}
+              overview={MAP_OVERVIEW}
+              onDestinationChange={(index) => setActive(index === null ? null : destinasiDunia[index].id)}
+              onComplete={() => {
+                restartTimer.current = setTimeout(() => {
+                  setActive(null);
+                  setAnimationKey((previous) => previous + 1);
+                }, JEDA_SEMARANG);
+              }}
               waypoints={ruteTurDunia}
               color="#e11d48"
               width={2}
