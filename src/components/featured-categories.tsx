@@ -54,6 +54,7 @@ function KartuKategori({ category, index }: { category: Kategori; index: number 
         src={category.image}
         alt={category.title}
         fill
+        sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 296px"
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />

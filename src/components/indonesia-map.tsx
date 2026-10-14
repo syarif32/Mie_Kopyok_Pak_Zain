@@ -38,6 +38,7 @@ export function IndonesiaMap() {
   const [animationKey, setAnimationKey] = useState(0); // Pemicu restart animasi tanpa error TypeScript
   
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const shouldLoadMap = useInView(mapContainerRef, { once: true, margin: "400px" });
   const isInView = useInView(mapContainerRef, { once: true, margin: "-100px" });
 
   const restartTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -78,7 +79,7 @@ export function IndonesiaMap() {
           ref={mapContainerRef} 
           className="relative mt-10 md:mt-14 w-full max-w-6xl mx-auto h-[400px] sm:h-[500px] lg:h-[650px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10"
         >
-          <Map 
+          {shouldLoadMap && <Map
             theme="dark"
             center={MAP_OVERVIEW.center}
             zoom={MAP_OVERVIEW.zoom}
@@ -202,7 +203,7 @@ export function IndonesiaMap() {
                 />
               );
             })}
-          </Map>
+          </Map>}
         </div>
       </div>
     </section>

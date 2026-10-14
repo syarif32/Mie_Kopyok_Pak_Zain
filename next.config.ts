@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
+      { protocol: "https", hostname: "www.dapurkobe.co.id", pathname: "/wp-content/uploads/**" },
       {
         protocol: 'https',
         hostname: 'suczeqmomyvhjuoppcee.supabase.co',

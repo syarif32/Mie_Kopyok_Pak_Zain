@@ -56,7 +56,8 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
       mousePosition: { x: 0, y: 0 },
     });
 
-    let count = 0;
+    const countRef = React.useRef(0);
+    const particlesRef = React.useRef(new Map<HTMLElement, { timer: ReturnType<typeof setTimeout>; dispose: () => void }>());
 
     const createStar = React.useCallback(
       (position: Point) => {
@@ -71,7 +72,7 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
         wrapper.style.color = `rgb(${color})`;
         // Efek bayangan di teks diturunkan ketajamannya
         wrapper.style.textShadow = `0px 0px 1rem rgb(${color} / 0.3)`;
-        wrapper.style.animationName = configRef.current.animations[count++ % 3];
+        wrapper.style.animationName = configRef.current.animations[countRef.current++ % 3];
         wrapper.style.animationDuration = `${configRef.current.starAnimationDuration}ms`;
 
         document.body.appendChild(wrapper);
@@ -79,10 +80,12 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
         const root = createRoot(wrapper);
         root.render(Icon);
 
-        setTimeout(() => {
-          root.unmount();
-          document.body.removeChild(wrapper);
+        const dispose = () => { root.unmount(); wrapper.remove(); };
+        const timer = setTimeout(() => {
+          particlesRef.current.delete(wrapper);
+          dispose();
         }, configRef.current.starAnimationDuration);
+        particlesRef.current.set(wrapper, { timer, dispose });
       },
       [Icon, className],
     );
@@ -95,10 +98,12 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
         glow.style.top = `${position.y}px`;
 
         document.body.appendChild(glow);
-        setTimeout(
-          () => document.body.removeChild(glow),
-          configRef.current.glowDuration,
-        );
+        const dispose = () => glow.remove();
+        const timer = setTimeout(() => {
+          particlesRef.current.delete(glow);
+          dispose();
+        }, configRef.current.glowDuration);
+        particlesRef.current.set(glow, { timer, dispose });
       },
       [className],
     );
@@ -114,11 +119,11 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
         const dx = (current.x - last.x) / quantity;
         const dy = (current.y - last.y) / quantity;
 
-        Array.from({ length: quantity }).forEach((_, index) => {
+        for (let index = 0; index < quantity; index++) {
           const x = last.x + dx * index;
           const y = last.y + dy * index;
           createGlowPoint({ x, y });
-        });
+        }
       },
       [createGlowPoint],
     );
@@ -155,20 +160,26 @@ const MagicCursor = React.forwardRef<HTMLDivElement, MouseSparklesProps>(
     );
 
     React.useEffect(() => {
-      window.addEventListener("mousemove", handleOnMove);
-      window.addEventListener("touchmove", (e) => handleOnMove(e.touches[0]));
-      document.body.addEventListener("mouseleave", () => {
+      const particles = particlesRef.current;
+      const handleTouchMove = (event: TouchEvent) => {
+        if (event.touches[0]) handleOnMove(event.touches[0]);
+      };
+      const handleLeave = () => {
         lastRef.current.mousePosition = { x: 0, y: 0 };
-      });
+      };
+      window.addEventListener("mousemove", handleOnMove, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      document.body.addEventListener("mouseleave", handleLeave);
 
       return () => {
         window.removeEventListener("mousemove", handleOnMove);
-        window.removeEventListener("touchmove", (e) =>
-          handleOnMove(e.touches[0]),
-        );
-        document.body.removeEventListener("mouseleave", () => {
-          lastRef.current.mousePosition = { x: 0, y: 0 };
-        });
+        window.removeEventListener("touchmove", handleTouchMove);
+        document.body.removeEventListener("mouseleave", handleLeave);
+        for (const { timer, dispose } of particles.values()) {
+          clearTimeout(timer);
+          dispose();
+        }
+        particles.clear();
       };
     }, [handleOnMove]);
 

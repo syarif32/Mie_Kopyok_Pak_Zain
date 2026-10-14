@@ -20,6 +20,7 @@ export function Cta() {
             src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
             alt="Suasana Kuliner Hangat"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           {/* Gradient overlay gelap agar teks mudah dibaca dan senada dengan tema dark */}

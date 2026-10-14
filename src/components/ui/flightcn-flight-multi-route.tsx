@@ -398,6 +398,12 @@ export function FlightMultiRoute({
         map.jumpTo({ center: waypoints[0], zoom: 3.2 });
       }
 
+      // Cache layout and SVG references outside the per-frame animation work.
+      const planeSvg = planeEl.querySelector("svg")!;
+      let containerHeight = map.getContainer().clientHeight;
+      const updateHeight = () => { containerHeight = map.getContainer().clientHeight; };
+      map.on("resize", updateHeight);
+
       const cycleDuration = roundTrip ? duration * 2 : duration;
       const startTime = performance.now() + delay;
       let stopped = false;
@@ -456,12 +462,12 @@ export function FlightMultiRoute({
             center,
             zoom: 3.2 - framing * (finalStop ? 0.8 : 0.35),
             // Popup cards sit above their marker; reserve screen space above it.
-            padding: { top: Math.min(finalStop ? 280 : 150, map.getContainer().clientHeight - 100) * framing, bottom: 0, left: 0, right: 0 },
+            padding: { top: Math.min(finalStop ? 280 : 150, containerHeight - 100) * framing, bottom: 0, left: 0, right: 0 },
           };
           if (followPlaneRef.current) map.jumpTo(cameraRef.current);
         }
         planeEl.style.transform = `${planeEl.style.transform.replace(/rotate\([^)]*\)/, "")} rotate(${heading}deg)`;
-        planeEl.querySelector("svg")!.style.transform = `rotate(${heading}deg)`;
+        planeSvg.style.transform = `rotate(${heading}deg)`;
 
         if (finished) {
           callbacksRef.current.onComplete?.();
@@ -474,6 +480,7 @@ export function FlightMultiRoute({
 
       cleanupAnim = () => {
         stopped = true;
+        map.off("resize", updateHeight);
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         marker.remove();
         planeMarkerRef.current = null;

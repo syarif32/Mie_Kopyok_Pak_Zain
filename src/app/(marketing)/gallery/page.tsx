@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ReactLenis } from "lenis/react";
@@ -52,7 +53,7 @@ const menuKateringData = [
     color: '#1C2E1B',
   },{
     title: 'Menu Bisa Menyesuaikan Request Anda',
-    description: 'Pelepas dahaga paripurna! Minuman segar perpaduan melon serut, daging kelapa muda, biji selasih, dan perasan jeruk nipis yang menyegarkan.',
+    description: 'Kami menerima pesanan sesuai permintaan Anda. Hubungi kami untuk mendiskusikan menu yang sesuai dengan kebutuhan acara Anda, termasuk pilihan hidangan, porsi, dan preferensi rasa.',
     link: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=800&auto=format&fit=crop',
     color: '#1C2E1B',
   }
@@ -129,7 +130,7 @@ function KateringCard({
 
           <div className="relative w-full md:w-[60%] h-36 sm:h-48 md:h-full shrink-0 rounded-2xl overflow-hidden shadow-xl">
             <motion.div className="w-full h-full" style={{ scale: imageScale }}>
-              <img src={url} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+              <Image src={url} alt={title} fill sizes="(max-width: 767px) 100vw, 600px" className="absolute inset-0 w-full h-full object-cover" />
             </motion.div>
           </div>
         </div>

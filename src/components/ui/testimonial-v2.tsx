@@ -115,6 +115,8 @@ const TestimonialsColumn = (props: {
                     </p>
                     <footer className="flex items-center gap-3 mt-6">
                       <img
+                        loading="lazy"
+                        decoding="async"
                         width={40}
                         height={40}
                         src={image}

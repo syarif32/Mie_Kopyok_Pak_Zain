@@ -23,6 +23,7 @@ export function Story() {
             src="/images/ko.png"
             alt="Proses meracik bumbu warisan"
             fill
+            sizes="(max-width: 767px) 100vw, 50vw"
             className="object-cover"
           />
           {/* Overlay tipis agar gambar lebih menyatu dengan tema */}

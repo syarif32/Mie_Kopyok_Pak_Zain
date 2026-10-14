@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import {
   motion,
@@ -147,8 +148,11 @@ export const RollingGallery: React.FC<RollingGalleryProps> = ({
                 transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
               }}
             >
-              <img
+              <Image
                 src={url}
+                width={260}
+                height={260}
+                sizes="(max-width: 639px) 160px, 260px"
                 alt={`Gambar Galeri ${i + 1}`}
                 // Bingkai diubah menjadi sedikit gelap (black/10) agar terlihat di latar cream
                 className="pointer-events-none w-[160px] h-[160px] sm:w-[260px] sm:h-[260px] aspect-square shrink-0 rounded-[24px] border-[1px] border-black/10 object-cover transition-all duration-300 ease-out group-hover:scale-110 group-hover:border-[var(--color-primary)] group-hover:shadow-2xl group-hover:shadow-black/15"

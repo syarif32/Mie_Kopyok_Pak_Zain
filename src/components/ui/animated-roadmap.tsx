@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -79,9 +80,12 @@ const AnimatedRoadmap = React.forwardRef<HTMLDivElement, AnimatedRoadmapProps>(
           // Mengubah sudut lengkung menjadi lebih membulat (rounded-[2.5rem]) agar estetik
           className="absolute inset-0 rounded-[2.5rem] overflow-hidden shadow-2xl"
         >
-          <img
+          <Image
             src={mapImageSrc}
             alt="Anatomi Mie Kopyok"
+            fill
+            priority
+            sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 767px) calc(100vw - 48px), 768px"
             className="h-full w-full object-cover brightness-75"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
