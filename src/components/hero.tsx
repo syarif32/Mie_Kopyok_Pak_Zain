@@ -109,13 +109,13 @@ export function Hero() {
         </motion.span>
         
         {/* PERUBAHAN ADA DI SINI: Menambahkan pemanggilan font dan menghapus font-bold & uppercase */}
-        <motion.h2 {...entrance(0.12)} className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-[var(--color-dark)] leading-tight">
-          Kenali Lebih Dekat <br />
-          <span className="text-[var(--color-primary)] italic">Kelezatan</span> Kami
-        </motion.h2>
+        <motion.h1 {...entrance(0.12)} className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-[var(--color-dark)] leading-tight">
+          Mie Kopyok Pak Zain <br />
+          <span className="text-[var(--color-primary)] italic">Kuliner Khas Semarang</span>
+        </motion.h1>
         
         <motion.p {...entrance(0.24)} className="mt-5 text-base sm:text-lg text-[var(--color-dark)]/70 md:text-xl font-light">
-          Bedah setiap lapis kelezatan legendaris kami. Terbuat dari bahan-bahan pilihan yang diracik sempurna dengan kuah kaldu bawang yang menghangatkan jiwa.
+          Nikmati mie kopyok dengan irisan lontong, tauge, dan kerupuk gendar dalam kuah kaldu bawang. Temukan kuliner khas Semarang kami di Jl. Badak V No.31, Gayamsari.
         </motion.p>
         
         <motion.div {...entrance(0.36)} className="mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">

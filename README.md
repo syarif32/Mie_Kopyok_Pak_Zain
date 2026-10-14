@@ -66,3 +66,13 @@ Redeploy after changing either value. Without SITE_URL, canonical URLs and socia
 Submit /sitemap.xml in Search Console, inspect the home URL, and request indexing. Verify /robots.txt and validate /contact with Google's Rich Results Test. Each of the five public pages has its own title, description, canonical URL, and social metadata. Restaurant JSON-LD on /contact mirrors the address, phone, and hours visible there; keep both updated together.
 
 Metadata does not guarantee rankings. Replace remaining marketplace placeholder content in the footer, and keep business details consistent across the website and Google Business Profile.
+
+## Strategi pencarian lokal
+
+- Beranda menargetkan mie kopyok dan kuliner khas Semarang; halaman menu menjawab pilihan hidangan dan harga, sedangkan halaman kontak menjawab lokasi dan jam buka.
+- SITE_URL wajib diisi domain publik sebenarnya sebelum deployment. Tanpanya sitemap kosong dan canonical tidak diterbitkan. Jangan menggunakan domain contoh sebagai konfigurasi produksi.
+- Konfirmasi alamat administratif, lokasi Google Maps, dan harga sebelum menambahkan klaim Semarang Timur, dekat Masjid Agung Jawa Tengah (MAJT), atau tempat makan murah. Jangan mengarang jarak atau waktu perjalanan.
+- Setelah terkonfirmasi, tambahkan petunjuk perjalanan dari MAJT yang berguna pada halaman kontak, dan kisaran harga aktual pada menu. Gunakan istilah mie lontong secara alami jika memang merupakan nama yang digunakan untuk sajian usaha ini.
+- Lengkapi dan verifikasi Google Profil Bisnis: nama asli usaha, kategori yang sesuai, alamat, telepon, jam buka, menu, foto asli, serta tautan website. Minta ulasan jujur dari pelanggan tanpa insentif.
+- Setelah deployment, kirim sitemap.xml melalui Google Search Console, inspeksi URL, dan validasi schema halaman kontak memakai Rich Results Test. Pantau kueri, tayangan, klik, serta halaman tujuan untuk menilai hasil; tidak ada jaminan peringkat pertama.
+- Referensi: https://support.google.com/business/answer/7091?hl=id dan https://developers.google.com/search/docs/appearance/structured-data/local-business

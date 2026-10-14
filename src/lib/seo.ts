@@ -9,10 +9,10 @@ export const absoluteUrl = (path: string) => siteUrl ? new URL(path, siteUrl).hr
 export const seoPages = {
   "/": {
     title: "Mie Kopyok Pak Zain | Kuliner Khas Semarang",
-    description: "Nikmati Mie Kopyok Pak Zain di Gayamsari, Semarang. Jelajahi menu, kisah usaha, galeri katering, serta informasi lokasi dan jam buka kami.",
+    description: "Kuliner khas Semarang di Gayamsari: Mie Kopyok Pak Zain dengan lontong, tauge, dan kerupuk gendar. Lihat menu, harga, jam buka, dan lokasi warung.",
   },
   "/menu": {
-    title: "Menu Makanan dan Minuman",
+    title: "Menu dan Harga Mie Kopyok di Semarang",
     description: "Lihat pilihan menu makanan dan minuman Mie Kopyok Pak Zain di Semarang, lengkap dengan harga dan deskripsi untuk membantu memilih pesanan Anda.",
   },
   "/story": {
@@ -24,7 +24,7 @@ export const seoPages = {
     description: "Jelajahi galeri dan pilihan menu katering Mie Kopyok Pak Zain. Temukan inspirasi hidangan untuk acara Anda dan hubungi kami untuk pemesanan.",
   },
   "/contact": {
-    title: "Lokasi, Jam Buka, dan Kontak",
+    title: "Lokasi di Gayamsari Semarang, Jam Buka dan Kontak",
     description: "Kunjungi Mie Kopyok Pak Zain di Jl. Badak V No.31, Gayamsari, Semarang. Buka setiap hari 09.00-16.00 WIB. Hubungi kami untuk pesanan dan katering.",
   },
 } as const;
@@ -50,7 +50,8 @@ export const restaurantSchema = {
   "@type": "Restaurant",
   name: siteName,
   ...(siteUrl ? { "@id": absoluteUrl("/#restaurant"), url: siteUrl, image: absoluteUrl("/images/ko.png"), hasMenu: absoluteUrl("/menu") } : {}),
-  servesCuisine: "Masakan Indonesia",
+  description: "Mie kopyok khas Semarang dengan irisan lontong, tauge, kerupuk gendar, dan kuah kaldu bawang di Gayamsari.",
+  servesCuisine: ["Masakan Indonesia", "Kuliner khas Semarang"],
   telephone: "+62-895-2457-0682",
   email: "miekopyokpakzain@gmail.com",
   address: {
