@@ -13,16 +13,6 @@ import { createPortal } from "react-dom";
 import type * as MapLibreGLType from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-/* ------------------------------------------------------------------ */
-/*  Types                                                              */
-/* ------------------------------------------------------------------ */
-/*  NOTE: "maplibre-gl" touches `window`/`document` as soon as its     */
-/*  module is evaluated. Next.js evaluates client-component modules    */
-/*  on the server too (for the initial render), which crashes it.      */
-/*  We therefore only ever `import("maplibre-gl")` dynamically, inside */
-/*  useEffect, so the real module is never touched outside the browser.*/
-/* ------------------------------------------------------------------ */
-
 type LngLat = [number, number];
 type MapLibreModule = typeof MapLibreGLType;
 
@@ -72,9 +62,6 @@ interface FlightMultiRouteProps {
   overview?: { center: LngLat; zoom: number };
 }
 
-/* ------------------------------------------------------------------ */
-/*  Context                                                            */
-/* ------------------------------------------------------------------ */
 
 const MapContext = createContext<MapContextValue>({
   map: null,
