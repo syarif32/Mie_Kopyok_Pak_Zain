@@ -128,7 +128,7 @@ export function MenuGrid({ menus, categories }: { menus: DatabaseMenu[], categor
         const lowerName = name.toLowerCase();
         if (lowerName.includes('mie kopyok')) return 1;
         if (lowerName.includes('bakso ikan')) return 2;
-        if (lowerName.includes('es gempol') || lowerName.includes('es gempo')) return 3;
+        if (lowerName.includes('es gempol')) return 3;
         return 4; 
       };
 

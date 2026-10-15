@@ -1,9 +1,12 @@
-import { createClient } from '@supabase/supabase-js';
-import { MenuGrid, type DatabaseMenu, type MenuCategory } from "@/components/featured-products";
+// import { createClient } from '@supabase/supabase-js';
+// import { MenuGrid, type DatabaseMenu, type MenuCategory } from "@/components/featured-products";
+import { MenuGrid } from "@/components/featured-products";
+import { menus, menuCategories as categories } from "@/lib/menu-data";
 import { MagicCursor } from "@/components/ui/cursor";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
+/* Kode database lama disimpan sebagai referensi; katalog kini memakai data lokal.
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -37,8 +40,11 @@ async function getMenuData() {
   };
 }
 
-export default async function MenuPage() {
-  const { menus, categories } = await getMenuData();
+*/
+
+// export default async function MenuPage() {
+export default function MenuPage() {
+  // const { menus, categories } = await getMenuData();
 
   return (
     <main className="relative min-h-screen bg-[var(--color-cream)] text-[var(--color-dark)] flex flex-col">
