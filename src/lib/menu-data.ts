@@ -1,9 +1,5 @@
 import type { DatabaseMenu, MenuCategory } from "@/components/featured-products";
 
-// Katalog company profile, terpisah dari stok dan status aktif POS.
-// Edit nama, harga (rupiah), deskripsi, dan gambar langsung di file ini.
-// image_url: gunakan path seperti "/images/ko.png"; null memakai gambar bawaan.
-// Samakan slug menu_categories dengan slug kategori saat menambah menu.
 export const menuCategories: MenuCategory[] = [
   {
     "id": "makanan",
