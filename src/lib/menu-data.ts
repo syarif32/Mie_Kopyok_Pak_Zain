@@ -39,7 +39,7 @@ export const menus: DatabaseMenu[] = [
     "id": "bakso-ikan",
     "name": "Bakso Ikan",
     "current_price": 14000,
-    "image_url": null,
+    "image_url": "/images/product/bakso.png",
     "description": "Bakso ikan dengan cita rasa gurih khas ikan. Pilihan sajian untuk menikmati variasi menu selain mie kopyok.",
     "menu_categories": {
       "name": "Makanan",
@@ -50,7 +50,7 @@ export const menus: DatabaseMenu[] = [
     "id": "snack-kecil",
     "name": "Snack Kecil",
     "current_price": 3000,
-    "image_url": null,
+    "image_url": "/images/product/snack.png",
     "description": "Camilan dalam kemasan kecil untuk menemani waktu santai atau melengkapi hidangan. Tanyakan pilihan yang tersedia kepada kami.",
     "menu_categories": {
       "name": "Camilan",
@@ -61,7 +61,7 @@ export const menus: DatabaseMenu[] = [
     "id": "kacang",
     "name": "Kacang",
     "current_price": 2000,
-    "image_url": null,
+    "image_url": "/images/product/kacang.png",
     "description": "Camilan kacang untuk dinikmati sambil berbincang atau menunggu sajian utama. Pelengkap sederhana untuk waktu santai Anda.",
     "menu_categories": {
       "name": "Camilan",
@@ -72,7 +72,7 @@ export const menus: DatabaseMenu[] = [
     "id": "snack-besar",
     "name": "Snack Besar",
     "current_price": 7000,
-    "image_url": null,
+    "image_url": "/images/product/snack.png",
     "description": "Camilan dalam kemasan besar untuk dinikmati sendiri maupun bersama teman. Tanyakan pilihan yang tersedia kepada kami.",
     "menu_categories": {
       "name": "Camilan",
@@ -83,7 +83,7 @@ export const menus: DatabaseMenu[] = [
     "id": "jeruk",
     "name": "Jeruk (Es/Panas)",
     "current_price": 5000,
-    "image_url": null,
+    "image_url": "/images/product/jeruk.png",
     "description": "Minuman jeruk dengan cita rasa manis dan asam yang menyegarkan. Nikmati hangat atau dengan es sesuai selera.",
     "menu_categories": {
       "name": "Minuman",
@@ -94,7 +94,7 @@ export const menus: DatabaseMenu[] = [
     "id": "jeruk-tawar",
     "name": "Jeruk Tawar (Es/Panas)",
     "current_price": 4000,
-    "image_url": null,
+    "image_url": "/images/product/jeruk.png",
     "description": "Minuman jeruk tawar dengan cita rasa manis dan asam yang menyegarkan. Nikmati hangat atau dengan es sesuai selera.",
     "menu_categories": {
       "name": "Minuman",
@@ -105,7 +105,7 @@ export const menus: DatabaseMenu[] = [
     "id": "air-mineral",
     "name": "Air Mineral",
     "current_price": 4000,
-    "image_url": null,
+    "image_url": "/images/product/airmineral.png",
     "description": "Air mineral untuk melepas dahaga dan menemani hidangan pilihan Anda. Pilihan minuman tanpa tambahan rasa manis.",
     "menu_categories": {
       "name": "Minuman",
@@ -116,7 +116,7 @@ export const menus: DatabaseMenu[] = [
     "id": "teh-tawar",
     "name": "Teh Tawar (Hot/Ice)",
     "current_price": 2000,
-    "image_url": null,
+    "image_url": "/images/product/teh.png",
     "description": "Teh tanpa tambahan gula untuk menikmati cita rasa teh apa adanya. Tersedia hangat atau dengan es.",
     "menu_categories": {
       "name": "Minuman",
@@ -127,7 +127,7 @@ export const menus: DatabaseMenu[] = [
     "id": "teh-manis",
     "name": "Teh Manis (Hot/Ice)",
     "current_price": 3000,
-    "image_url": null,
+    "image_url": "/images/product/teh.png",
     "description": "Teh dengan rasa manis yang cocok menemani semangkuk mie kopyok. Pilih sajian hangat atau dengan es sesuai selera.",
     "menu_categories": {
       "name": "Minuman",
@@ -138,7 +138,7 @@ export const menus: DatabaseMenu[] = [
     "id": "kerupuk-gendar",
     "name": "Kerupuk Gendar",
     "current_price": 1500,
-    "image_url": null,
+    "image_url": "/images/product/gendar.png",
     "description": "Tambahan kerupuk gendar yang renyah untuk melengkapi mie kopyok. Nikmati sebagai camilan atau padukan dengan kuah gurihnya.",
     "menu_categories": {
       "name": "Tambahan",
@@ -160,7 +160,7 @@ export const menus: DatabaseMenu[] = [
     "id": "es-gempol",
     "name": "Es Gempol",
     "current_price": 10000,
-    "image_url": null,
+    "image_url": "/images/product/gempol.png",
     "description": "Minuman tradisional dengan gempol bertekstur lembut dan sajian es yang menyegarkan. Cocok dinikmati setelah menyantap hidangan hangat.",
     "menu_categories": {
       "name": "Minuman",
@@ -171,7 +171,7 @@ export const menus: DatabaseMenu[] = [
     "id": "air-putih",
     "name": "Air Putih",
     "current_price": 1000,
-    "image_url": null,
+    "image_url": "/images/product/airputih.png",
     "description": "Air putih sebagai pendamping sederhana untuk setiap hidangan, tanpa tambahan gula maupun perisa.",
     "menu_categories": {
       "name": "Minuman",
@@ -182,7 +182,7 @@ export const menus: DatabaseMenu[] = [
     "id": "lontong",
     "name": "Lontong",
     "current_price": 3000,
-    "image_url": null,
+    "image_url": "/images/product/lontong.png",
     "description": "Tambahan lontong untuk melengkapi porsi makan Anda. Padukan dengan kuah mie kopyok agar lebih mengenyangkan.",
     "menu_categories": {
       "name": "Tambahan",
@@ -193,7 +193,7 @@ export const menus: DatabaseMenu[] = [
     "id": "thinwall-sendok-plastik",
     "name": "Thinwall + Sendok Plastik",
     "current_price": 2000,
-    "image_url": null,
+    "image_url": "/images/product/thinwal.png",
     "description": "Wadah makan thinwall beserta sendok plastik untuk melengkapi pesanan yang dibawa pulang agar lebih praktis dinikmati.",
     "menu_categories": {
       "name": "Tambahan",

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 120" fill="none">
+  <!-- Alas monumen saja -->
+  <path d="M 24 96
+           L 78 52
+           L 142 52
+           L 196 96
+           Z"
+        fill="#722D3E"/>
+  <!-- Aksen garis alas -->
+  <path d="M 72 83 L 148 83"
+        stroke="#F1E8DA"
+        stroke-width="10"
+        stroke-linecap="round"/>
+</svg>
