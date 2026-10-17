@@ -171,7 +171,7 @@ export const menus: DatabaseMenu[] = [
     "id": "air-putih",
     "name": "Air Putih",
     "current_price": 1000,
-    "image_url": "/images/product/airputih.png",
+    "image_url": "/images/product/airgelas.png",
     "description": "Air putih sebagai pendamping sederhana untuk setiap hidangan, tanpa tambahan gula maupun perisa.",
     "menu_categories": {
       "name": "Minuman",
