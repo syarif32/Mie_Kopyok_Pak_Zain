@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Eye, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import posterSections from "./logo-philosophy-poster.json";
 
 const elements = [
   {
@@ -69,11 +70,8 @@ export function LogoPhilosophy() {
           <p className="mt-6 text-base font-light leading-relaxed text-[var(--color-dark)]/70 sm:text-lg">Identitas budaya Semarang, gerak kuliner tradisional, dan semangat usaha keluarga berpadu dalam satu simbol yang hangat dan terus tumbuh bersama zaman.</p>
         </motion.div>
 
-        <motion.figure {...reveal} className="mt-10 overflow-hidden rounded-[32px] bg-[#FCF8F1] md:mt-14">
-          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Diagram elemen logo, geser horizontal untuk membaca label pada layar kecil">
-            <Image src="/icon/diagram_logo_editable.svg" alt="Diagram logo Mie Kopyok Pak Zain: siluet Tugu Muda, lengkungan mie, gerakan kopyok, aksen alas, dan bentuk mangkuk." width={1200} height={690} sizes="(max-width: 767px) 720px, (max-width: 1280px) 100vw, 1216px" className="h-auto w-full min-w-[720px]" />
-          </div>
-          <figcaption className="px-6 pb-5 text-center text-xs leading-relaxed text-[var(--color-soft-brown)] sm:hidden">Geser diagram ke samping untuk melihat seluruh elemen logo.</figcaption>
+        <motion.figure {...reveal} className="mt-10 overflow-hidden rounded-[24px] bg-[#FCF8F1] sm:rounded-[32px] md:mt-14">
+          <Image src="/icon/diagram_logo_editable.svg" alt="Diagram logo: Tugu Muda, lengkungan mie, gerakan kopyok, aksen alas, dan bentuk mangkuk." width={1200} height={690} sizes="(max-width: 1280px) 100vw, 1216px" className="h-auto w-full" />
         </motion.figure>
 
         <div className="mx-auto mt-12 max-w-3xl md:mt-16">
@@ -126,13 +124,21 @@ export function LogoPhilosophy() {
         </div>
       </div>
 
-      <dialog id="philosophy-preview" ref={dialogRef} aria-labelledby="philosophy-preview-title" onClose={() => { restoreScroll(); triggerRef.current?.focus(); }} onClick={(event) => { if (event.target === event.currentTarget) dialogRef.current?.close(); }} className="fixed inset-0 m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-[24px] border-0 bg-[var(--color-cream)] p-0 text-[var(--color-dark)] shadow-2xl backdrop:bg-black/65">
-        <div className="flex items-center justify-between gap-4 border-b border-black/10 px-5 py-4 sm:px-7">
+      <dialog id="philosophy-preview" ref={dialogRef} aria-labelledby="philosophy-preview-title" onClose={() => { restoreScroll(); triggerRef.current?.focus(); }} onClick={(event) => { if (event.target === event.currentTarget) dialogRef.current?.close(); }} className="fixed inset-0 m-auto h-[100dvh] max-h-[100dvh] w-full max-w-5xl sm:h-auto sm:max-h-[90dvh] sm:w-[calc(100%-2rem)] overflow-hidden rounded-none sm:rounded-[24px] border-0 bg-[var(--color-cream)] p-0 text-[var(--color-dark)] shadow-2xl backdrop:bg-black/65">
+        <div className="flex h-20 items-center justify-between gap-4 border-b border-black/10 px-5 py-4 sm:px-7">
           <h2 id="philosophy-preview-title" className="text-sm font-semibold sm:text-lg">Filosofi Logo Mie Kopyok Pak Zain</h2>
           <button type="button" autoFocus aria-label="Tutup preview filosofi" onClick={() => dialogRef.current?.close()} className="visible-focus flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black/5 transition-colors hover:bg-black/10"><X size={20} aria-hidden="true" /></button>
         </div>
-        <div data-lenis-prevent className="max-h-[calc(90dvh-80px)] overflow-auto overscroll-contain p-3 sm:p-6" tabIndex={0} role="region" aria-label="Poster filosofi lengkap, dapat digulir">
-          <Image src="/icon/poster_filosofi_logo_editable.svg" alt="Poster lengkap filosofi logo Mie Kopyok Pak Zain, menjelaskan Tugu Muda, lengkungan mie, aksen alas, warna, tipografi, dan makna keseluruhan." width={1200} height={2165} sizes="(max-width: 768px) 768px, 1024px" className="h-auto w-full min-w-[768px]" />
+        <div data-lenis-prevent className="h-[calc(100dvh-80px)] overflow-y-auto overscroll-contain p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:h-auto sm:max-h-[calc(90dvh-80px)] sm:p-6" tabIndex={0} role="region" aria-label="Poster filosofi lengkap, dapat digulir">
+          <Image src="/icon/poster_filosofi_logo_editable.svg" alt="Poster lengkap filosofi logo Mie Kopyok Pak Zain, menjelaskan Tugu Muda, lengkungan mie, aksen alas, warna, tipografi, dan makna keseluruhan." width={1200} height={2165} sizes="(max-width: 1024px) 100vw, 1024px" className="h-auto w-full" />
+          <div className="mt-8 space-y-6 md:hidden">
+            {posterSections.map((section) => (
+              <section key={section.title} className="border-t border-black/10 pt-5">
+                <h3 className="text-base font-semibold leading-relaxed">{section.title}</h3>
+                <p className="mt-3 text-base leading-relaxed text-[var(--color-dark)]/75">{section.description}</p>
+              </section>
+            ))}
+          </div>
         </div>
       </dialog>
     </section>
