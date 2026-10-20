@@ -16,10 +16,15 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   ...pageMetadata("/"),
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
-  applicationName: "Mie Kopyok Pak Zain",
+ applicationName: "Mie Kopyok Pak Zain",
   icons: {
-    icon: { url: "/favicon.png", type: "image/png", sizes: "192x192" },
-    shortcut: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
