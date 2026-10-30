@@ -25,7 +25,7 @@ export const seoPages = {
   },
   "/contact": {
     title: "Lokasi di Gayamsari Semarang, Jam Buka dan Kontak",
-    description: "Kunjungi Mie Kopyok Pak Zain di Jl. Badak V No.31, Gayamsari, Semarang. Buka setiap hari 09.00-16.00 WIB. Hubungi kami untuk pesanan dan katering.",
+    description: "Kunjungi Mie Kopyok Pak Zain di Jl. Badak V No.31, Gayamsari, Semarang. Buka setiap hari 10.00-16.00 WIB. Hubungi kami untuk pesanan dan katering.",
   },
 } as const;
 
